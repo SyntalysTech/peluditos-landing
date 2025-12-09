@@ -8,6 +8,7 @@ import {
   Features,
   SpainMap,
   Pricing,
+  ContactForm,
   CTA,
   Footer,
 } from "@/components";
@@ -25,6 +26,7 @@ export default function Home() {
         <Features />
         <SpainMap />
         <Pricing />
+        <ContactForm />
         <CTA />
       </main>
       <Footer />
