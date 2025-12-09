@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     // Enviar email a contact@peluditos.eu
     const { data, error } = await resend.emails.send({
-      from: "Peluditos Web <onboarding@resend.dev>",
+      from: "Peluditos Web <noreply@peluditos.eu>",
       to: ["contact@peluditos.eu"],
       subject: `Nuevo contacto de ${nombre} - ${clinica || "Sin clínica"}`,
       html: `
