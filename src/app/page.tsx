@@ -6,6 +6,7 @@ import {
   Stats,
   Emotional,
   Features,
+  MobileApp,
   SpainMap,
   Pricing,
   ContactForm,
@@ -24,6 +25,7 @@ export default function Home() {
         <Stats />
         <Emotional />
         <Features />
+        <MobileApp />
         <SpainMap />
         <Pricing />
         <ContactForm />

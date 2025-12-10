@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const links = [
-  { label: "Sobre nosotros", href: "#" },
-  { label: "Contacto", href: "#" },
-  { label: "Privacidad", href: "#" },
-  { label: "Términos", href: "#" },
+  { label: "Sobre nosotros", href: "#about" },
+  { label: "Contacto", href: "#contacto" },
+  { label: "Privacidad", href: "/privacidad" },
+  { label: "Términos", href: "/terminos" },
 ];
 
 export default function Footer() {
@@ -21,15 +22,25 @@ export default function Footer() {
           />
 
           <nav className="flex flex-wrap justify-center gap-8 lg:gap-12">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-white transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-white transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           <div className="w-full h-px bg-white/10" />

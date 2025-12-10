@@ -5,6 +5,7 @@ export { default as HowItWorks } from "./HowItWorks";
 export { default as Stats } from "./Stats";
 export { default as Emotional } from "./Emotional";
 export { default as Features } from "./Features";
+export { default as MobileApp } from "./MobileApp";
 export { default as SpainMap } from "./SpainMap";
 export { default as Pricing } from "./Pricing";
 export { default as ContactForm } from "./ContactForm";
