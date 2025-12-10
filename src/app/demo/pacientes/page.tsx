@@ -139,7 +139,7 @@ export default function PacientesPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-light">Pacientes</h1>
-          <p className="text-black/50 mt-1">{patients.length} pacientes registrados</p>
+          <p className="text-black/50 dark:text-white/50 mt-1">{patients.length} pacientes registrados</p>
         </div>
         <button
           onClick={() => { setSelectedPatient(null); setActiveTab("info"); setShowModal(true); }}
@@ -154,20 +154,20 @@ export default function PacientesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Total pacientes</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Total pacientes</p>
           <p className="text-2xl font-light mt-2">{patients.length}</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Perros</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Perros</p>
           <p className="text-2xl font-light mt-2">{patients.filter(p => p.species === "Perro").length}</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Gatos</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Gatos</p>
           <p className="text-2xl font-light mt-2">{patients.filter(p => p.species === "Gato").length}</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Activos</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Activos</p>
           <p className="text-2xl font-light mt-2 text-green-600">{patients.filter(p => p.status === "active").length}</p>
         </div>
       </div>
@@ -183,14 +183,14 @@ export default function PacientesPage() {
             placeholder="Buscar por nombre, dueño o raza..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+            className="w-full pl-10 pr-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
           />
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setFilter("all")}
             className={`px-4 py-3 font-medium transition-colors ${
-              filter === "all" ? "bg-black text-white" : "bg-white border border-black/10 hover:bg-black/5"
+              filter === "all" ? "bg-black text-white" : "bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5"
             }`}
           >
             Todos
@@ -198,7 +198,7 @@ export default function PacientesPage() {
           <button
             onClick={() => setFilter("perro")}
             className={`px-4 py-3 font-medium transition-colors ${
-              filter === "perro" ? "bg-black text-white" : "bg-white border border-black/10 hover:bg-black/5"
+              filter === "perro" ? "bg-black text-white" : "bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5"
             }`}
           >
             Perros
@@ -206,7 +206,7 @@ export default function PacientesPage() {
           <button
             onClick={() => setFilter("gato")}
             className={`px-4 py-3 font-medium transition-colors ${
-              filter === "gato" ? "bg-black text-white" : "bg-white border border-black/10 hover:bg-black/5"
+              filter === "gato" ? "bg-black text-white" : "bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5"
             }`}
           >
             Gatos
@@ -215,23 +215,23 @@ export default function PacientesPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-black/5 overflow-hidden">
+      <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-black/5">
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Paciente</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Especie / Raza</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Edad</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Dueño</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Última visita</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Estado</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm"></th>
+              <tr className="border-b border-black/5 dark:border-white/5">
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Paciente</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Especie / Raza</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Edad</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Dueño</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Última visita</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Estado</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-black/5">
+            <tbody className="divide-y divide-black/5 dark:divide-white/5">
               {filteredPatients.map((patient) => (
-                <tr key={patient.id} className="hover:bg-black/[0.02] transition-colors cursor-pointer" onClick={() => openPatient(patient)}>
+                <tr key={patient.id} className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors cursor-pointer" onClick={() => openPatient(patient)}>
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-xl">
@@ -239,30 +239,30 @@ export default function PacientesPage() {
                       </div>
                       <div>
                         <p className="font-medium">{patient.name}</p>
-                        <p className="text-xs text-black/40">{patient.chip}</p>
+                        <p className="text-xs text-black/40 dark:text-white/40">{patient.chip}</p>
                       </div>
                     </div>
                   </td>
                   <td className="p-4">
                     <p className="text-sm">{patient.species}</p>
-                    <p className="text-xs text-black/50">{patient.breed}</p>
+                    <p className="text-xs text-black/50 dark:text-white/50">{patient.breed}</p>
                   </td>
                   <td className="p-4 text-sm">{patient.age}</td>
                   <td className="p-4">
                     <p className="text-sm">{patient.owner}</p>
-                    <p className="text-xs text-black/50">{patient.phone}</p>
+                    <p className="text-xs text-black/50 dark:text-white/50">{patient.phone}</p>
                   </td>
                   <td className="p-4 text-sm">{patient.lastVisit}</td>
                   <td className="p-4">
                     <span className={`inline-block px-3 py-1 text-xs font-medium ${
-                      patient.status === "active" ? "bg-green-100 text-green-700" : "bg-black/5 text-black/50"
+                      patient.status === "active" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" : "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                     }`}>
                       {patient.status === "active" ? "Activo" : "Inactivo"}
                     </span>
                   </td>
                   <td className="p-4">
-                    <button className="p-2 hover:bg-black/5 transition-colors">
-                      <svg className="w-5 h-5 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                      <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -277,12 +277,12 @@ export default function PacientesPage() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-black/5 sticky top-0 bg-white z-10">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5 sticky top-0 bg-white dark:bg-[#1a1a1a] z-10">
               <h2 className="text-lg font-medium">
                 {selectedPatient ? `Ficha de ${selectedPatient.name}` : "Nuevo paciente"}
               </h2>
-              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 transition-colors">
+              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -292,7 +292,7 @@ export default function PacientesPage() {
             {selectedPatient && (
               <>
                 {/* Patient header */}
-                <div className="p-6 bg-gradient-to-r from-[#f68b44]/10 to-transparent border-b border-black/5">
+                <div className="p-6 bg-gradient-to-r from-[#f68b44]/10 to-transparent border-b border-black/5 dark:border-white/5">
                   <div className="flex items-center gap-4">
                     <div className="w-20 h-20 rounded-full bg-[#f68b44]/20 flex items-center justify-center text-4xl">
                       {selectedPatient.photo}
@@ -301,28 +301,28 @@ export default function PacientesPage() {
                       <div className="flex items-center gap-3">
                         <h3 className="text-2xl font-medium">{selectedPatient.name}</h3>
                         <span className={`px-2 py-0.5 text-xs font-medium ${
-                          selectedPatient.status === "active" ? "bg-green-100 text-green-700" : "bg-black/5 text-black/50"
+                          selectedPatient.status === "active" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" : "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                         }`}>
                           {selectedPatient.status === "active" ? "Activo" : "Inactivo"}
                         </span>
                       </div>
-                      <p className="text-black/60">{selectedPatient.breed} • {selectedPatient.sex} • {selectedPatient.age}</p>
-                      <p className="text-sm text-black/40 mt-1">Chip: {selectedPatient.chip}</p>
+                      <p className="text-black/60 dark:text-white/60">{selectedPatient.breed} • {selectedPatient.sex} • {selectedPatient.age}</p>
+                      <p className="text-sm text-black/40 dark:text-white/40 mt-1">Chip: {selectedPatient.chip}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-black/50">Dueño</p>
+                      <p className="text-sm text-black/50 dark:text-white/50">Dueño</p>
                       <p className="font-medium">{selectedPatient.owner}</p>
-                      <p className="text-sm text-black/50">{selectedPatient.phone}</p>
+                      <p className="text-sm text-black/50 dark:text-white/50">{selectedPatient.phone}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex border-b border-black/5">
+                <div className="flex border-b border-black/5 dark:border-white/5">
                   <button
                     onClick={() => setActiveTab("info")}
                     className={`px-6 py-3 font-medium text-sm transition-colors ${
-                      activeTab === "info" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 hover:text-black"
+                      activeTab === "info" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
                     }`}
                   >
                     Información
@@ -330,7 +330,7 @@ export default function PacientesPage() {
                   <button
                     onClick={() => setActiveTab("vaccines")}
                     className={`px-6 py-3 font-medium text-sm transition-colors ${
-                      activeTab === "vaccines" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 hover:text-black"
+                      activeTab === "vaccines" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
                     }`}
                   >
                     Vacunas
@@ -338,7 +338,7 @@ export default function PacientesPage() {
                   <button
                     onClick={() => setActiveTab("history")}
                     className={`px-6 py-3 font-medium text-sm transition-colors ${
-                      activeTab === "history" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 hover:text-black"
+                      activeTab === "history" ? "text-[#f68b44] border-b-2 border-[#f68b44]" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
                     }`}
                   >
                     Historial
@@ -350,16 +350,16 @@ export default function PacientesPage() {
                   {activeTab === "info" && (
                     <div className="space-y-6">
                       <div className="grid md:grid-cols-3 gap-4">
-                        <div className="p-4 bg-black/[0.02]">
-                          <p className="text-xs text-black/40 uppercase">Peso</p>
+                        <div className="p-4 bg-black/[0.02] dark:bg-white/[0.02]">
+                          <p className="text-xs text-black/40 dark:text-white/40 uppercase">Peso</p>
                           <p className="text-lg font-medium mt-1">{selectedPatient.weight} kg</p>
                         </div>
-                        <div className="p-4 bg-black/[0.02]">
-                          <p className="text-xs text-black/40 uppercase">Color</p>
+                        <div className="p-4 bg-black/[0.02] dark:bg-white/[0.02]">
+                          <p className="text-xs text-black/40 dark:text-white/40 uppercase">Color</p>
                           <p className="text-lg font-medium mt-1">{selectedPatient.color}</p>
                         </div>
-                        <div className="p-4 bg-black/[0.02]">
-                          <p className="text-xs text-black/40 uppercase">Esterilizado</p>
+                        <div className="p-4 bg-black/[0.02] dark:bg-white/[0.02]">
+                          <p className="text-xs text-black/40 dark:text-white/40 uppercase">Esterilizado</p>
                           <p className="text-lg font-medium mt-1">{selectedPatient.sterilized ? "Sí" : "No"}</p>
                         </div>
                       </div>
@@ -369,7 +369,7 @@ export default function PacientesPage() {
                           <h4 className="font-medium mb-2">Alergias</h4>
                           <div className="flex flex-wrap gap-2">
                             {selectedPatient.allergies.map((allergy, i) => (
-                              <span key={i} className="px-3 py-1 bg-red-100 text-red-700 text-sm">
+                              <span key={i} className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm">
                                 {allergy}
                               </span>
                             ))}
@@ -379,7 +379,7 @@ export default function PacientesPage() {
 
                       <div>
                         <h4 className="font-medium mb-2">Datos del propietario</h4>
-                        <div className="p-4 bg-black/[0.02] space-y-2">
+                        <div className="p-4 bg-black/[0.02] dark:bg-white/[0.02] space-y-2">
                           <p><strong>Nombre:</strong> {selectedPatient.owner}</p>
                           <p><strong>Teléfono:</strong> {selectedPatient.phone}</p>
                           <p><strong>Email:</strong> {selectedPatient.email}</p>
@@ -395,20 +395,20 @@ export default function PacientesPage() {
                         <button className="text-sm text-[#f68b44] hover:underline">+ Añadir vacuna</button>
                       </div>
                       {selectedPatient.vaccines.map((vaccine, i) => (
-                        <div key={i} className="flex items-center justify-between p-4 border border-black/5 hover:bg-black/[0.01]">
+                        <div key={i} className="flex items-center justify-between p-4 border border-black/5 dark:border-white/5 hover:bg-black/[0.01] dark:hover:bg-white/[0.01]">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-green-100 flex items-center justify-center">
-                              <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                              <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
                             </div>
                             <div>
                               <p className="font-medium">{vaccine.name}</p>
-                              <p className="text-sm text-black/50">Administrada: {vaccine.date}</p>
+                              <p className="text-sm text-black/50 dark:text-white/50">Administrada: {vaccine.date}</p>
                             </div>
                           </div>
                           <div className="text-right">
-                            <p className="text-sm text-black/40">Próxima dosis</p>
+                            <p className="text-sm text-black/40 dark:text-white/40">Próxima dosis</p>
                             <p className="font-medium text-[#f68b44]">{vaccine.next}</p>
                           </div>
                         </div>
@@ -423,20 +423,20 @@ export default function PacientesPage() {
                         <button className="text-sm text-[#f68b44] hover:underline">+ Nueva entrada</button>
                       </div>
                       {selectedPatient.history.map((entry, i) => (
-                        <div key={i} className="p-4 border border-black/5 hover:bg-black/[0.01]">
+                        <div key={i} className="p-4 border border-black/5 dark:border-white/5 hover:bg-black/[0.01] dark:hover:bg-white/[0.01]">
                           <div className="flex items-center justify-between mb-2">
                             <span className={`px-2 py-0.5 text-xs font-medium ${
-                              entry.type === "Vacunación" ? "bg-green-100 text-green-700" :
-                              entry.type === "Cirugía" ? "bg-red-100 text-red-700" :
-                              entry.type === "Urgencia" ? "bg-yellow-100 text-yellow-700" :
-                              "bg-blue-100 text-blue-700"
+                              entry.type === "Vacunación" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" :
+                              entry.type === "Cirugía" ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400" :
+                              entry.type === "Urgencia" ? "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400" :
+                              "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
                             }`}>
                               {entry.type}
                             </span>
-                            <span className="text-sm text-black/50">{entry.date}</span>
+                            <span className="text-sm text-black/50 dark:text-white/50">{entry.date}</span>
                           </div>
                           <p className="text-sm">{entry.description}</p>
-                          <p className="text-xs text-black/40 mt-2">Atendido por: {entry.vet}</p>
+                          <p className="text-xs text-black/40 dark:text-white/40 mt-2">Atendido por: {entry.vet}</p>
                         </div>
                       ))}
                     </div>
@@ -452,13 +452,13 @@ export default function PacientesPage() {
                     <label className="block text-sm font-medium mb-2">Nombre</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
                       placeholder="Nombre del paciente"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Especie</label>
-                    <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                    <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                       <option>Perro</option>
                       <option>Gato</option>
                       <option>Otro</option>
@@ -468,26 +468,26 @@ export default function PacientesPage() {
                     <label className="block text-sm font-medium mb-2">Raza</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
                       placeholder="Raza"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Sexo</label>
-                    <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                    <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                       <option>Macho</option>
                       <option>Hembra</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Fecha nacimiento</label>
-                    <input type="date" className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]" />
+                    <input type="date" className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Peso (kg)</label>
                     <input
                       type="number"
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
                       placeholder="0.0"
                     />
                   </div>
@@ -495,7 +495,7 @@ export default function PacientesPage() {
                     <label className="block text-sm font-medium mb-2">Color</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
                       placeholder="Color del pelaje"
                     />
                   </div>
@@ -503,7 +503,7 @@ export default function PacientesPage() {
                     <label className="block text-sm font-medium mb-2">Microchip</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]"
                       placeholder="Número de microchip"
                     />
                   </div>
@@ -511,7 +511,7 @@ export default function PacientesPage() {
 
                 <div>
                   <label className="block text-sm font-medium mb-2">Propietario</label>
-                  <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                     <option value="">Seleccionar propietario...</option>
                     <option>María García</option>
                     <option>Carlos López</option>
@@ -524,15 +524,15 @@ export default function PacientesPage() {
                   <label className="block text-sm font-medium mb-2">Notas</label>
                   <textarea
                     rows={3}
-                    className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44] resize-none"
+                    className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44] resize-none"
                     placeholder="Notas adicionales sobre el paciente..."
                   />
                 </div>
               </div>
             )}
 
-            <div className="flex justify-end gap-3 p-6 border-t border-black/5">
-              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors">
+            <div className="flex justify-end gap-3 p-6 border-t border-black/5 dark:border-white/5">
+              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 dark:border-white/10 font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 {selectedPatient ? "Cerrar" : "Cancelar"}
               </button>
               {!selectedPatient && (

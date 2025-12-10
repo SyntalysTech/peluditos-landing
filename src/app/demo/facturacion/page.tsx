@@ -14,9 +14,9 @@ const invoices = [
 type Invoice = typeof invoices[0];
 
 const statusColors: Record<string, { bg: string; text: string; label: string }> = {
-  paid: { bg: "bg-green-100", text: "text-green-700", label: "Pagada" },
-  pending: { bg: "bg-yellow-100", text: "text-yellow-700", label: "Pendiente" },
-  overdue: { bg: "bg-red-100", text: "text-red-700", label: "Vencida" },
+  paid: { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-400", label: "Pagada" },
+  pending: { bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-400", label: "Pendiente" },
+  overdue: { bg: "bg-red-100 dark:bg-red-900/30", text: "text-red-700 dark:text-red-400", label: "Vencida" },
 };
 
 const services = [
@@ -231,8 +231,8 @@ export default function FacturacionPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-light">Facturación</h1>
-          <p className="text-black/50 mt-1">Gestión de facturas y cobros</p>
+          <h1 className="text-2xl font-light text-black dark:text-white">Facturación</h1>
+          <p className="text-black/50 dark:text-white/50 mt-1">Gestión de facturas y cobros</p>
         </div>
         <button
           onClick={() => { setSelectedItems([]); setSelectedClient(null); setShowModal(true); }}
@@ -247,28 +247,28 @@ export default function FacturacionPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Facturado este mes</p>
-          <p className="text-2xl font-light mt-2">{totalMonth.toFixed(2)}€</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Facturado este mes</p>
+          <p className="text-2xl font-light mt-2 text-black dark:text-white">{totalMonth.toFixed(2)}€</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Pendiente de cobro</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Pendiente de cobro</p>
           <p className="text-2xl font-light mt-2 text-[#f68b44]">{totalPending.toFixed(2)}€</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Facturas este mes</p>
-          <p className="text-2xl font-light mt-2">{invoices.length}</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Facturas este mes</p>
+          <p className="text-2xl font-light mt-2 text-black dark:text-white">{invoices.length}</p>
         </div>
-        <div className="bg-white p-6 border border-black/5">
-          <p className="text-sm text-black/50">Ticket medio</p>
-          <p className="text-2xl font-light mt-2">{(totalMonth / invoices.length).toFixed(2)}€</p>
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+          <p className="text-sm text-black/50 dark:text-white/50">Ticket medio</p>
+          <p className="text-2xl font-light mt-2 text-black dark:text-white">{(totalMonth / invoices.length).toFixed(2)}€</p>
         </div>
       </div>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30 dark:text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -276,7 +276,7 @@ export default function FacturacionPage() {
             placeholder="Buscar por cliente o número de factura..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+            className="w-full pl-10 pr-4 py-3 border border-black/10 dark:border-white/10 bg-white dark:bg-[#242424] text-black dark:text-white focus:outline-none focus:border-[#f68b44]"
           />
         </div>
         <div className="flex gap-2">
@@ -290,7 +290,7 @@ export default function FacturacionPage() {
               key={f.key}
               onClick={() => setFilter(f.key)}
               className={`px-4 py-3 font-medium transition-colors ${
-                filter === f.key ? "bg-black text-white" : "bg-white border border-black/10 hover:bg-black/5"
+                filter === f.key ? "bg-black dark:bg-white text-white dark:text-black" : "bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white"
               }`}
             >
               {f.label}
@@ -300,39 +300,39 @@ export default function FacturacionPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-black/5 overflow-hidden">
+      <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-black/5">
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Factura</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Fecha</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Cliente</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Conceptos</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Total</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm">Estado</th>
-                <th className="text-left p-4 font-medium text-black/50 text-sm"></th>
+              <tr className="border-b border-black/5 dark:border-white/5">
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Factura</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Fecha</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Cliente</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Conceptos</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Total</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Estado</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-black/5">
+            <tbody className="divide-y divide-black/5 dark:divide-white/5">
               {filteredInvoices.map((invoice) => (
-                <tr key={invoice.id} className="hover:bg-black/[0.02] transition-colors">
+                <tr key={invoice.id} className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
                   <td className="p-4">
-                    <p className="font-medium">{invoice.id}</p>
+                    <p className="font-medium text-black dark:text-white">{invoice.id}</p>
                   </td>
-                  <td className="p-4 text-sm">{invoice.date}</td>
+                  <td className="p-4 text-sm text-black dark:text-white">{invoice.date}</td>
                   <td className="p-4">
-                    <p className="text-sm">{invoice.client}</p>
-                    <p className="text-xs text-black/50">{invoice.pet}</p>
+                    <p className="text-sm text-black dark:text-white">{invoice.client}</p>
+                    <p className="text-xs text-black/50 dark:text-white/50">{invoice.pet}</p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm text-black/60 truncate max-w-[200px]">
+                    <p className="text-sm text-black/60 dark:text-white/60 truncate max-w-[200px]">
                       {invoice.items.map(i => i.name).join(", ")}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="font-medium">{(invoice.total * 1.21).toFixed(2)}€</p>
-                    <p className="text-xs text-black/40">IVA incl.</p>
+                    <p className="font-medium text-black dark:text-white">{(invoice.total * 1.21).toFixed(2)}€</p>
+                    <p className="text-xs text-black/40 dark:text-white/40">IVA incl.</p>
                   </td>
                   <td className="p-4">
                     <span className={`inline-block px-3 py-1 text-xs font-medium ${statusColors[invoice.status].bg} ${statusColors[invoice.status].text}`}>
@@ -343,20 +343,20 @@ export default function FacturacionPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => generatePDF(invoice)}
-                        className="p-2 hover:bg-black/5 transition-colors"
+                        className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                         title="Ver factura"
                       >
-                        <svg className="w-5 h-5 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                       </button>
                       <button
                         onClick={() => generatePDF(invoice)}
-                        className="p-2 hover:bg-black/5 transition-colors"
+                        className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                         title="Descargar PDF"
                       >
-                        <svg className="w-5 h-5 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                       </button>
@@ -371,12 +371,12 @@ export default function FacturacionPage() {
 
       {/* New Invoice Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-black/5 sticky top-0 bg-white">
-              <h2 className="text-lg font-medium">Nueva factura</h2>
-              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 transition-colors">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5 sticky top-0 bg-white dark:bg-[#1a1a1a]">
+              <h2 className="text-lg font-medium text-black dark:text-white">Nueva factura</h2>
+              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <svg className="w-5 h-5 text-black dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -386,9 +386,9 @@ export default function FacturacionPage() {
                 {/* Left: Client selection and services */}
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Cliente</label>
+                    <label className="block text-sm font-medium mb-2 text-black dark:text-white">Cliente</label>
                     <select
-                      className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                      className="w-full px-4 py-3 border border-black/10 dark:border-white/10 bg-white dark:bg-[#242424] text-black dark:text-white focus:outline-none focus:border-[#f68b44]"
                       onChange={(e) => {
                         const client = clients.find(c => c.name === e.target.value);
                         setSelectedClient(client || null);
@@ -401,7 +401,7 @@ export default function FacturacionPage() {
                       ))}
                     </select>
                     {selectedClient && (
-                      <div className="mt-2 p-3 bg-black/[0.02] text-sm">
+                      <div className="mt-2 p-3 bg-black/[0.02] dark:bg-white/[0.02] text-sm text-black dark:text-white">
                         <p><strong>NIF:</strong> {selectedClient.nif}</p>
                         <p><strong>Dirección:</strong> {selectedClient.address}</p>
                         <p><strong>Email:</strong> {selectedClient.email}</p>
@@ -410,17 +410,17 @@ export default function FacturacionPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Servicios disponibles</label>
-                    <div className="border border-black/10 max-h-[300px] overflow-y-auto">
+                    <label className="block text-sm font-medium mb-2 text-black dark:text-white">Servicios disponibles</label>
+                    <div className="border border-black/10 dark:border-white/10 max-h-[300px] overflow-y-auto">
                       {services.map((service, i) => (
                         <div
                           key={i}
-                          className="flex items-center justify-between p-3 hover:bg-black/[0.02] cursor-pointer border-b border-black/5 last:border-b-0"
+                          className="flex items-center justify-between p-3 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] cursor-pointer border-b border-black/5 dark:border-white/5 last:border-b-0"
                           onClick={() => addItem(service)}
                         >
-                          <span className="text-sm">{service.name}</span>
+                          <span className="text-sm text-black dark:text-white">{service.name}</span>
                           <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium">{service.price.toFixed(2)}€</span>
+                            <span className="text-sm font-medium text-black dark:text-white">{service.price.toFixed(2)}€</span>
                             <svg className="w-5 h-5 text-[#f68b44]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
                             </svg>
@@ -432,23 +432,23 @@ export default function FacturacionPage() {
                 </div>
 
                 {/* Right: Invoice preview */}
-                <div className="bg-black/[0.02] p-6">
-                  <h3 className="font-medium mb-4">Resumen de factura</h3>
+                <div className="bg-black/[0.02] dark:bg-white/[0.02] p-6">
+                  <h3 className="font-medium mb-4 text-black dark:text-white">Resumen de factura</h3>
 
                   {selectedItems.length === 0 ? (
-                    <p className="text-black/40 text-sm text-center py-8">
+                    <p className="text-black/40 dark:text-white/40 text-sm text-center py-8">
                       Añade servicios desde la lista de la izquierda
                     </p>
                   ) : (
                     <div className="space-y-2">
                       {selectedItems.map((item, i) => (
-                        <div key={i} className="flex items-center justify-between p-3 bg-white">
-                          <span className="text-sm">{item.name}</span>
+                        <div key={i} className="flex items-center justify-between p-3 bg-white dark:bg-[#242424]">
+                          <span className="text-sm text-black dark:text-white">{item.name}</span>
                           <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium">{item.price.toFixed(2)}€</span>
+                            <span className="text-sm font-medium text-black dark:text-white">{item.price.toFixed(2)}€</span>
                             <button
                               onClick={() => removeItem(i)}
-                              className="text-red-500 hover:text-red-700"
+                              className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                             >
                               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -460,25 +460,25 @@ export default function FacturacionPage() {
                     </div>
                   )}
 
-                  <div className="mt-6 pt-4 border-t border-black/10">
-                    <div className="flex justify-between text-sm mb-2">
+                  <div className="mt-6 pt-4 border-t border-black/10 dark:border-white/10">
+                    <div className="flex justify-between text-sm mb-2 text-black dark:text-white">
                       <span>Subtotal</span>
                       <span>{invoiceTotal.toFixed(2)}€</span>
                     </div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm mb-2 text-black dark:text-white">
                       <span>IVA (21%)</span>
                       <span>{(invoiceTotal * 0.21).toFixed(2)}€</span>
                     </div>
-                    <div className="flex justify-between text-lg font-medium pt-2 border-t border-black/10">
-                      <span>Total</span>
+                    <div className="flex justify-between text-lg font-medium pt-2 border-t border-black/10 dark:border-white/10">
+                      <span className="text-black dark:text-white">Total</span>
                       <span className="text-[#f68b44]">{(invoiceTotal * 1.21).toFixed(2)}€</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-3 p-6 border-t border-black/5">
-              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors">
+            <div className="flex justify-end gap-3 p-6 border-t border-black/5 dark:border-white/5">
+              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 dark:border-white/10 font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-black dark:text-white">
                 Cancelar
               </button>
               <button
@@ -486,7 +486,7 @@ export default function FacturacionPage() {
                 disabled={selectedItems.length === 0 || !selectedClient}
                 className={`px-6 py-3 font-medium transition-colors ${
                   selectedItems.length === 0 || !selectedClient
-                    ? 'bg-black/20 text-black/40 cursor-not-allowed'
+                    ? 'bg-black/20 dark:bg-white/20 text-black/40 dark:text-white/40 cursor-not-allowed'
                     : 'bg-[#f68b44] text-white hover:bg-[#e07a35]'
                 }`}
               >
@@ -499,10 +499,10 @@ export default function FacturacionPage() {
 
       {/* PDF Preview Modal */}
       {showPdfModal && viewingInvoice && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b border-black/5 sticky top-0 bg-white">
-              <h2 className="text-lg font-medium">Vista previa - {viewingInvoice.id}</h2>
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-black/5 dark:border-white/5 sticky top-0 bg-white dark:bg-[#1a1a1a]">
+              <h2 className="text-lg font-medium text-black dark:text-white">Vista previa - {viewingInvoice.id}</h2>
               <div className="flex items-center gap-2">
                 <button
                   onClick={downloadPDF}
@@ -513,8 +513,8 @@ export default function FacturacionPage() {
                   </svg>
                   Descargar PDF
                 </button>
-                <button onClick={() => setShowPdfModal(false)} className="p-2 hover:bg-black/5 transition-colors">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button onClick={() => setShowPdfModal(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                  <svg className="w-5 h-5 text-black dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -522,12 +522,12 @@ export default function FacturacionPage() {
             </div>
 
             {/* PDF Preview Content */}
-            <div ref={pdfRef} className="p-8 bg-white">
+            <div ref={pdfRef} className="p-8 bg-white dark:bg-[#1a1a1a]">
               {/* Header */}
               <div className="flex justify-between items-start mb-8 pb-4 border-b-2 border-[#f68b44]">
                 <img src="/logos/logo-horizontal-orange.png" alt="Peluditos CRM" className="h-12" />
-                <div className="text-right text-xs text-black/60">
-                  <p className="font-medium text-black">Clínica Veterinaria Peluditos</p>
+                <div className="text-right text-xs text-black/60 dark:text-white/60">
+                  <p className="font-medium text-black dark:text-white">Clínica Veterinaria Peluditos</p>
                   <p>CIF: B12345678</p>
                   <p>Calle Veterinaria 123</p>
                   <p>28001 Madrid, España</p>
@@ -541,14 +541,14 @@ export default function FacturacionPage() {
               {/* Meta info */}
               <div className="flex justify-between mb-8">
                 <div>
-                  <h3 className="text-xs text-black/40 uppercase mb-2">Datos del cliente</h3>
-                  <p className="font-medium">{viewingInvoice.client}</p>
-                  <p className="text-sm text-black/60">Paciente: {viewingInvoice.pet}</p>
+                  <h3 className="text-xs text-black/40 dark:text-white/40 uppercase mb-2">Datos del cliente</h3>
+                  <p className="font-medium text-black dark:text-white">{viewingInvoice.client}</p>
+                  <p className="text-sm text-black/60 dark:text-white/60">Paciente: {viewingInvoice.pet}</p>
                 </div>
                 <div className="text-right">
-                  <h3 className="text-xs text-black/40 uppercase mb-2">Datos de factura</h3>
+                  <h3 className="text-xs text-black/40 dark:text-white/40 uppercase mb-2">Datos de factura</h3>
                   <p className="text-lg font-medium text-[#f68b44]">{viewingInvoice.id}</p>
-                  <p className="text-sm">Fecha: {viewingInvoice.date}</p>
+                  <p className="text-sm text-black dark:text-white">Fecha: {viewingInvoice.date}</p>
                   <span className={`inline-block mt-1 px-2 py-0.5 text-xs font-medium ${statusColors[viewingInvoice.status].bg} ${statusColors[viewingInvoice.status].text}`}>
                     {statusColors[viewingInvoice.status].label}
                   </span>
@@ -565,9 +565,9 @@ export default function FacturacionPage() {
                 </thead>
                 <tbody>
                   {viewingInvoice.items.map((item, i) => (
-                    <tr key={i} className="border-b border-black/5">
-                      <td className="p-3 text-sm">{item.name}</td>
-                      <td className="p-3 text-sm text-right">{item.price.toFixed(2)} €</td>
+                    <tr key={i} className="border-b border-black/5 dark:border-white/5">
+                      <td className="p-3 text-sm text-black dark:text-white">{item.name}</td>
+                      <td className="p-3 text-sm text-right text-black dark:text-white">{item.price.toFixed(2)} €</td>
                     </tr>
                   ))}
                 </tbody>
@@ -575,22 +575,22 @@ export default function FacturacionPage() {
 
               {/* Totals */}
               <div className="ml-auto w-64">
-                <div className="flex justify-between py-2 text-sm">
+                <div className="flex justify-between py-2 text-sm text-black dark:text-white">
                   <span>Subtotal</span>
                   <span>{viewingInvoice.total.toFixed(2)} €</span>
                 </div>
-                <div className="flex justify-between py-2 text-sm">
+                <div className="flex justify-between py-2 text-sm text-black dark:text-white">
                   <span>IVA (21%)</span>
                   <span>{(viewingInvoice.total * 0.21).toFixed(2)} €</span>
                 </div>
                 <div className="flex justify-between py-3 text-lg font-medium border-t-2 border-[#f68b44] mt-2">
-                  <span>Total</span>
+                  <span className="text-black dark:text-white">Total</span>
                   <span className="text-[#f68b44]">{(viewingInvoice.total * 1.21).toFixed(2)} €</span>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="mt-12 pt-4 border-t border-black/10 text-center text-xs text-black/40">
+              <div className="mt-12 pt-4 border-t border-black/10 dark:border-white/10 text-center text-xs text-black/40 dark:text-white/40">
                 <p>Gracias por confiar en Clínica Veterinaria Peluditos</p>
                 <p className="mt-1">Esta factura ha sido generada electrónicamente y es válida sin firma</p>
               </div>

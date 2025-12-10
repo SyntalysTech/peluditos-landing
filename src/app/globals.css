@@ -7,6 +7,16 @@
     --black-pure: #000000;
   }
 
+  .dark {
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #242424;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border-color: rgba(255, 255, 255, 0.08);
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -27,12 +37,22 @@
     font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   }
 
+  .dark body,
+  html.dark body {
+    background-color: #0f0f0f;
+    color: #ffffff;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-track {
     background: #f4f2ef;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #1a1a1a;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -92,6 +112,91 @@
   .navbar-blur {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Demo Dark Mode Classes */
+  .demo-bg {
+    @apply bg-[#f4f2ef];
+  }
+  .dark .demo-bg {
+    @apply bg-[#0f0f0f];
+  }
+
+  .demo-card {
+    @apply bg-white border-black/5;
+  }
+  .dark .demo-card {
+    @apply bg-[#1a1a1a] border-white/5;
+  }
+
+  .demo-card-hover:hover {
+    @apply bg-black/[0.02];
+  }
+  .dark .demo-card-hover:hover {
+    @apply bg-white/[0.02];
+  }
+
+  .demo-text {
+    @apply text-black;
+  }
+  .dark .demo-text {
+    @apply text-white;
+  }
+
+  .demo-text-secondary {
+    @apply text-black/50;
+  }
+  .dark .demo-text-secondary {
+    @apply text-white/50;
+  }
+
+  .demo-text-muted {
+    @apply text-black/40;
+  }
+  .dark .demo-text-muted {
+    @apply text-white/40;
+  }
+
+  .demo-border {
+    @apply border-black/5;
+  }
+  .dark .demo-border {
+    @apply border-white/8;
+  }
+
+  .demo-input {
+    @apply bg-white border-black/10 text-black placeholder:text-black/30;
+  }
+  .dark .demo-input {
+    @apply bg-[#242424] border-white/10 text-white placeholder:text-white/30;
+  }
+
+  .demo-header {
+    @apply bg-white/80;
+  }
+  .dark .demo-header {
+    @apply bg-[#1a1a1a]/80;
+  }
+
+  .demo-modal {
+    @apply bg-white;
+  }
+  .dark .demo-modal {
+    @apply bg-[#1a1a1a];
+  }
+
+  .demo-subtle-bg {
+    @apply bg-black/5;
+  }
+  .dark .demo-subtle-bg {
+    @apply bg-white/5;
+  }
+
+  .demo-hover-bg:hover {
+    @apply bg-black/5;
+  }
+  .dark .demo-hover-bg:hover {
+    @apply bg-white/5;
   }
 }
 

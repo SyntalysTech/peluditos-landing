@@ -200,14 +200,14 @@ export default function AgendaPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-light">Agenda</h1>
-          <p className="text-black/50 mt-1">Gestiona las citas de tu clínica</p>
+          <p className="text-black/50 dark:text-white/50 mt-1">Gestiona las citas de tu clínica</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex bg-black/5 p-1">
+          <div className="flex bg-black/5 dark:bg-white/5 p-1">
             <button
               onClick={() => setView("week")}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "week" ? "bg-white text-black" : "text-black/50 hover:text-black"
+                view === "week" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
               }`}
             >
               Semana
@@ -215,7 +215,7 @@ export default function AgendaPage() {
             <button
               onClick={() => setView("day")}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "day" ? "bg-white text-black" : "text-black/50 hover:text-black"
+                view === "day" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
               }`}
             >
               Día
@@ -223,7 +223,7 @@ export default function AgendaPage() {
             <button
               onClick={() => setView("list")}
               className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "list" ? "bg-white text-black" : "text-black/50 hover:text-black"
+                view === "list" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
               }`}
             >
               Lista
@@ -242,9 +242,9 @@ export default function AgendaPage() {
       </div>
 
       {/* Calendar navigation */}
-      <div className="flex items-center justify-between bg-white p-4 border border-black/5">
+      <div className="flex items-center justify-between bg-white dark:bg-[#1a1a1a] p-4 border border-black/5 dark:border-white/5">
         <button
-          className="p-2 hover:bg-black/5 transition-colors"
+          className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
           onClick={() => view === "day" && setSelectedDay(Math.max(0, selectedDay - 1))}
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -253,12 +253,12 @@ export default function AgendaPage() {
         </button>
         <div className="text-center">
           <h2 className="font-medium">Diciembre 2025</h2>
-          <p className="text-sm text-black/50">
+          <p className="text-sm text-black/50 dark:text-white/50">
             {view === "day" ? `${weekDays[selectedDay]} ${selectedDay + 1}` : "Semana del 1 al 7"}
           </p>
         </div>
         <button
-          className="p-2 hover:bg-black/5 transition-colors"
+          className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
           onClick={() => view === "day" && setSelectedDay(Math.min(6, selectedDay + 1))}
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -269,20 +269,20 @@ export default function AgendaPage() {
 
       <div className="grid lg:grid-cols-4 gap-6">
         {/* Calendar grid */}
-        <div className="lg:col-span-3 bg-white border border-black/5">
+        <div className="lg:col-span-3 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5">
           {view === "week" && (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[800px] border-collapse">
                 <thead>
-                  <tr className="border-b border-black/10">
-                    <th className="w-16 p-3 text-sm text-black/50 font-normal border-r border-black/5"></th>
+                  <tr className="border-b border-black/10 dark:border-white/10">
+                    <th className="w-16 p-3 text-sm text-black/50 dark:text-white/50 font-normal border-r border-black/5 dark:border-white/5"></th>
                     {weekDays.map((day, i) => (
                       <th
                         key={day}
-                        className={`p-3 text-center border-r border-black/5 last:border-r-0 cursor-pointer hover:bg-black/[0.02] transition-colors ${i === 0 ? "bg-[#f68b44]/5" : ""}`}
+                        className={`p-3 text-center border-r border-black/5 dark:border-white/5 last:border-r-0 cursor-pointer hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors ${i === 0 ? "bg-[#f68b44]/5" : ""}`}
                         onClick={() => { setSelectedDay(i); setView("day"); }}
                       >
-                        <p className="text-sm text-black/50 font-normal">{day}</p>
+                        <p className="text-sm text-black/50 dark:text-white/50 font-normal">{day}</p>
                         <p className={`text-lg font-medium mt-1 ${i === 0 ? "text-[#f68b44]" : ""}`}>{i + 1}</p>
                       </th>
                     ))}
@@ -292,8 +292,8 @@ export default function AgendaPage() {
                   {hours.map((hour) => {
                     const hourNum = parseInt(hour.split(":")[0]);
                     return (
-                      <tr key={hour} className="border-b border-black/5">
-                        <td className="w-16 p-2 text-xs text-black/40 text-right pr-3 border-r border-black/5 align-top">
+                      <tr key={hour} className="border-b border-black/5 dark:border-white/5">
+                        <td className="w-16 p-2 text-xs text-black/40 dark:text-white/40 text-right pr-3 border-r border-black/5 dark:border-white/5 align-top">
                           {hour}
                         </td>
                         {weekDays.map((_, dayIndex) => {
@@ -305,7 +305,7 @@ export default function AgendaPage() {
                           return (
                             <td
                               key={dayIndex}
-                              className={`border-r border-black/5 last:border-r-0 p-1 align-top h-16 ${
+                              className={`border-r border-black/5 dark:border-white/5 last:border-r-0 p-1 align-top h-16 ${
                                 dayIndex === 0 ? "bg-[#f68b44]/[0.02]" : ""
                               }`}
                             >
@@ -331,10 +331,10 @@ export default function AgendaPage() {
           )}
 
           {view === "list" && (
-            <div className="divide-y divide-black/5">
+            <div className="divide-y divide-black/5 dark:divide-white/5">
               {todayAppointments.length === 0 ? (
-                <div className="p-8 text-center text-black/50">
-                  <svg className="w-12 h-12 mx-auto mb-4 text-black/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="p-8 text-center text-black/50 dark:text-white/50">
+                  <svg className="w-12 h-12 mx-auto mb-4 text-black/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <p>No hay citas para este día</p>
@@ -343,28 +343,28 @@ export default function AgendaPage() {
                 todayAppointments.map((apt) => (
                   <div
                     key={apt.id}
-                    className="flex items-center gap-4 p-4 hover:bg-black/[0.02] transition-colors cursor-pointer"
+                    className="flex items-center gap-4 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors cursor-pointer"
                     onClick={() => setViewingAppointment(apt)}
                   >
                     <div className={`w-1 h-12 ${apt.color}`} />
                     <div className="text-center min-w-[80px]">
                       <p className="text-lg font-medium">{apt.hour}</p>
-                      <p className="text-xs text-black/40">{apt.duration} min</p>
+                      <p className="text-xs text-black/40 dark:text-white/40">{apt.duration} min</p>
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">{apt.pet}</p>
-                      <p className="text-sm text-black/50">{apt.owner}</p>
+                      <p className="text-sm text-black/50 dark:text-white/50">{apt.owner}</p>
                     </div>
-                    <div className="text-sm text-black/60">{apt.type}</div>
+                    <div className="text-sm text-black/60 dark:text-white/60">{apt.type}</div>
                     <span className={`px-3 py-1 text-xs font-medium ${
-                      apt.status === "confirmed" ? "bg-green-100 text-green-700" :
-                      apt.status === "cancelled" ? "bg-red-100 text-red-700" :
-                      "bg-black/5 text-black/50"
+                      apt.status === "confirmed" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" :
+                      apt.status === "cancelled" ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400" :
+                      "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                     }`}>
                       {apt.status === "confirmed" ? "Confirmada" : apt.status === "cancelled" ? "Cancelada" : "Pendiente"}
                     </span>
-                    <button className="p-2 hover:bg-black/5 transition-colors">
-                      <svg className="w-5 h-5 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                      <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -375,9 +375,9 @@ export default function AgendaPage() {
           )}
 
           {view === "day" && (
-            <div className="divide-y divide-black/5">
+            <div className="divide-y divide-black/5 dark:divide-white/5">
               {/* Day header with selector */}
-              <div className="flex items-center gap-2 p-4 bg-black/[0.02] overflow-x-auto">
+              <div className="flex items-center gap-2 p-4 bg-black/[0.02] dark:bg-white/[0.02] overflow-x-auto">
                 {weekDays.map((day, i) => (
                   <button
                     key={day}
@@ -385,7 +385,7 @@ export default function AgendaPage() {
                     className={`flex flex-col items-center px-4 py-2 min-w-[60px] transition-colors ${
                       selectedDay === i
                         ? "bg-[#f68b44] text-white"
-                        : "bg-white hover:bg-black/5"
+                        : "bg-white dark:bg-[#242424] hover:bg-black/5 dark:hover:bg-white/5"
                     }`}
                   >
                     <span className="text-xs opacity-70">{day}</span>
@@ -397,8 +397,8 @@ export default function AgendaPage() {
               {/* Day timeline */}
               <div className="p-4">
                 {todayAppointments.length === 0 ? (
-                  <div className="p-8 text-center text-black/50">
-                    <svg className="w-12 h-12 mx-auto mb-4 text-black/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="p-8 text-center text-black/50 dark:text-white/50">
+                    <svg className="w-12 h-12 mx-auto mb-4 text-black/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <p>No hay citas programadas</p>
@@ -450,30 +450,30 @@ export default function AgendaPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Today's summary */}
-          <div className="bg-white border border-black/5 p-6">
+          <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 p-6">
             <h3 className="font-medium mb-4">
               {view === "week" ? "Resumen de la semana" : `Resumen ${weekDays[selectedDay]} ${selectedDay + 1}`}
             </h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-black/60">Total citas</span>
+                <span className="text-black/60 dark:text-white/60">Total citas</span>
                 <span className="font-medium">{view === "week" ? appointments.length : todayAppointments.length}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-black/60">Confirmadas</span>
-                <span className="text-green-600 font-medium">
+                <span className="text-black/60 dark:text-white/60">Confirmadas</span>
+                <span className="text-green-600 dark:text-green-400 font-medium">
                   {view === "week" ? appointments.filter(a => a.status === "confirmed").length : confirmedCount}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-black/60">Pendientes</span>
+                <span className="text-black/60 dark:text-white/60">Pendientes</span>
                 <span className="text-[#f68b44] font-medium">
                   {view === "week" ? appointments.filter(a => a.status === "pending").length : pendingCount}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-black/60">Canceladas</span>
-                <span className="text-red-500 font-medium">
+                <span className="text-black/60 dark:text-white/60">Canceladas</span>
+                <span className="text-red-500 dark:text-red-400 font-medium">
                   {view === "week" ? appointments.filter(a => a.status === "cancelled").length : 0}
                 </span>
               </div>
@@ -481,46 +481,46 @@ export default function AgendaPage() {
           </div>
 
           {/* Legend */}
-          <div className="bg-white border border-black/5 p-6">
+          <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 p-6">
             <h3 className="font-medium mb-4">Tipos de cita</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-blue-500" />
-                <span className="text-sm text-black/60">Consulta</span>
+                <span className="text-sm text-black/60 dark:text-white/60">Consulta</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-green-500" />
-                <span className="text-sm text-black/60">Vacunación</span>
+                <span className="text-sm text-black/60 dark:text-white/60">Vacunación</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-[#f68b44]" />
-                <span className="text-sm text-black/60">Revisión</span>
+                <span className="text-sm text-black/60 dark:text-white/60">Revisión</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-purple-500" />
-                <span className="text-sm text-black/60">Diagnóstico</span>
+                <span className="text-sm text-black/60 dark:text-white/60">Diagnóstico</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-red-500" />
-                <span className="text-sm text-black/60">Cirugía</span>
+                <span className="text-sm text-black/60 dark:text-white/60">Cirugía</span>
               </div>
             </div>
           </div>
 
           {/* Quick actions */}
-          <div className="bg-white border border-black/5 p-6">
+          <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 p-6">
             <h3 className="font-medium mb-4">Acciones rápidas</h3>
             <div className="space-y-2">
               <button
                 onClick={() => setShowModal(true)}
-                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
               >
                 <svg className="w-5 h-5 text-[#f68b44]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
                 </svg>
                 <span className="text-sm">Nueva cita</span>
               </button>
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] transition-colors">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
                 <svg className="w-5 h-5 text-[#f68b44]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -528,7 +528,7 @@ export default function AgendaPage() {
               </button>
               <button
                 onClick={printAgenda}
-                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
               >
                 <svg className="w-5 h-5 text-[#f68b44]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -543,10 +543,10 @@ export default function AgendaPage() {
       {/* New Appointment Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg">
-            <div className="flex items-center justify-between p-6 border-b border-black/5">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-lg">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5">
               <h2 className="text-lg font-medium">Nueva cita</h2>
-              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 transition-colors">
+              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -555,7 +555,7 @@ export default function AgendaPage() {
             <div className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Paciente</label>
-                <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                   <option>Seleccionar paciente...</option>
                   <option>Luna - María García</option>
                   <option>Max - Carlos López</option>
@@ -567,17 +567,17 @@ export default function AgendaPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Fecha</label>
-                  <input type="date" defaultValue="2025-12-01" className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]" />
+                  <input type="date" defaultValue="2025-12-01" className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Hora</label>
-                  <input type="time" defaultValue="09:00" className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]" />
+                  <input type="time" defaultValue="09:00" className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Tipo de cita</label>
-                  <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                     <option>Consulta general</option>
                     <option>Vacunación</option>
                     <option>Revisión</option>
@@ -588,7 +588,7 @@ export default function AgendaPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Duración</label>
-                  <select className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <select className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44]">
                     <option>15 minutos</option>
                     <option>30 minutos</option>
                     <option>45 minutos</option>
@@ -599,11 +599,11 @@ export default function AgendaPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Notas</label>
-                <textarea rows={3} className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44] resize-none" placeholder="Añade notas sobre la cita..." />
+                <textarea rows={3} className="w-full px-4 py-3 bg-white dark:bg-[#242424] text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 border border-black/10 dark:border-white/10 focus:outline-none focus:border-[#f68b44] resize-none" placeholder="Añade notas sobre la cita..." />
               </div>
             </div>
-            <div className="flex justify-end gap-3 p-6 border-t border-black/5">
-              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors">
+            <div className="flex justify-end gap-3 p-6 border-t border-black/5 dark:border-white/5">
+              <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 dark:border-white/10 font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 Cancelar
               </button>
               <button onClick={() => setShowModal(false)} className="px-6 py-3 bg-[#f68b44] text-white font-medium hover:bg-[#e07a35] transition-colors">
@@ -617,7 +617,7 @@ export default function AgendaPage() {
       {/* View Appointment Modal */}
       {viewingAppointment && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-lg">
             <div className={`${viewingAppointment.color} p-6`}>
               <div className="flex items-start justify-between text-white">
                 <div>
@@ -645,42 +645,42 @@ export default function AgendaPage() {
             </div>
 
             <div className="p-6 space-y-4">
-              <div className="flex items-center justify-between py-3 border-b border-black/5">
-                <span className="text-black/60">Tipo de cita</span>
+              <div className="flex items-center justify-between py-3 border-b border-black/5 dark:border-white/5">
+                <span className="text-black/60 dark:text-white/60">Tipo de cita</span>
                 <span className="font-medium">{viewingAppointment.type}</span>
               </div>
-              <div className="flex items-center justify-between py-3 border-b border-black/5">
-                <span className="text-black/60">Estado</span>
+              <div className="flex items-center justify-between py-3 border-b border-black/5 dark:border-white/5">
+                <span className="text-black/60 dark:text-white/60">Estado</span>
                 <span className={`px-3 py-1 text-xs font-medium ${
-                  viewingAppointment.status === "confirmed" ? "bg-green-100 text-green-700" :
-                  viewingAppointment.status === "cancelled" ? "bg-red-100 text-red-700" :
-                  "bg-black/5 text-black/50"
+                  viewingAppointment.status === "confirmed" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" :
+                  viewingAppointment.status === "cancelled" ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400" :
+                  "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                 }`}>
                   {viewingAppointment.status === "confirmed" ? "Confirmada" : viewingAppointment.status === "cancelled" ? "Cancelada" : "Pendiente"}
                 </span>
               </div>
-              <div className="flex items-center justify-between py-3 border-b border-black/5">
-                <span className="text-black/60">Teléfono</span>
+              <div className="flex items-center justify-between py-3 border-b border-black/5 dark:border-white/5">
+                <span className="text-black/60 dark:text-white/60">Teléfono</span>
                 <a href={`tel:${viewingAppointment.phone}`} className="font-medium text-[#f68b44] hover:underline">
                   {viewingAppointment.phone}
                 </a>
               </div>
               {viewingAppointment.notes && (
                 <div className="py-3">
-                  <span className="text-black/60 block mb-2">Notas</span>
-                  <p className="text-sm bg-black/[0.02] p-3">{viewingAppointment.notes}</p>
+                  <span className="text-black/60 dark:text-white/60 block mb-2">Notas</span>
+                  <p className="text-sm bg-black/[0.02] dark:bg-white/[0.02] p-3">{viewingAppointment.notes}</p>
                 </div>
               )}
             </div>
 
-            <div className="flex gap-3 p-6 border-t border-black/5">
-              <button className="flex-1 px-4 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2">
+            <div className="flex gap-3 p-6 border-t border-black/5 dark:border-white/5">
+              <button className="flex-1 px-4 py-3 border border-black/10 dark:border-white/10 font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
                 Editar
               </button>
-              <button className="flex-1 px-4 py-3 border border-red-200 text-red-600 font-medium hover:bg-red-50 transition-colors flex items-center justify-center gap-2">
+              <button className="flex-1 px-4 py-3 border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center justify-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>

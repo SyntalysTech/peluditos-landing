@@ -71,11 +71,11 @@ const records = [
 ];
 
 const typeColors: Record<string, string> = {
-  Consulta: "bg-blue-100 text-blue-700",
-  Vacunación: "bg-green-100 text-green-700",
-  Cirugía: "bg-red-100 text-red-700",
-  Urgencia: "bg-orange-100 text-orange-700",
-  Revisión: "bg-purple-100 text-purple-700",
+  Consulta: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400",
+  Vacunación: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400",
+  Cirugía: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+  Urgencia: "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400",
+  Revisión: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400",
 };
 
 export default function HistorialPage() {
@@ -94,8 +94,8 @@ export default function HistorialPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-light">Historial clínico</h1>
-          <p className="text-black/50 mt-1">Registro de todas las consultas y tratamientos</p>
+          <h1 className="text-2xl font-light text-black dark:text-white">Historial clínico</h1>
+          <p className="text-black/50 dark:text-white/50 mt-1">Registro de todas las consultas y tratamientos</p>
         </div>
         <button
           onClick={() => { setSelectedRecord(null); setShowModal(true); }}
@@ -110,7 +110,7 @@ export default function HistorialPage() {
 
       {/* Search */}
       <div className="relative">
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30 dark:text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input
@@ -118,7 +118,7 @@ export default function HistorialPage() {
           placeholder="Buscar por paciente, dueño o diagnóstico..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+          className="w-full pl-10 pr-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44]"
         />
       </div>
 
@@ -127,7 +127,7 @@ export default function HistorialPage() {
         {filteredRecords.map((record) => (
           <div
             key={record.id}
-            className="bg-white border border-black/5 hover:border-[#f68b44]/30 transition-colors cursor-pointer"
+            className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 hover:border-[#f68b44]/30 transition-colors cursor-pointer"
             onClick={() => { setSelectedRecord(record); setShowModal(true); }}
           >
             <div className="p-6">
@@ -138,26 +138,26 @@ export default function HistorialPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-3">
-                      <h3 className="font-medium">{record.pet}</h3>
+                      <h3 className="font-medium text-black dark:text-white">{record.pet}</h3>
                       <span className={`px-2 py-1 text-xs font-medium ${typeColors[record.type]}`}>
                         {record.type}
                       </span>
                     </div>
-                    <p className="text-sm text-black/50">{record.owner} · {record.date}</p>
+                    <p className="text-sm text-black/50 dark:text-white/50">{record.owner} · {record.date}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium">{record.vet}</p>
-                  <p className="text-xs text-black/50">Veterinario</p>
+                  <p className="text-sm font-medium text-black dark:text-white">{record.vet}</p>
+                  <p className="text-xs text-black/50 dark:text-white/50">Veterinario</p>
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-black/5">
-                <p className="text-sm"><span className="font-medium">Diagnóstico:</span> {record.diagnosis}</p>
-                <p className="text-sm text-black/60 mt-2 line-clamp-2">{record.treatment}</p>
+              <div className="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
+                <p className="text-sm text-black dark:text-white"><span className="font-medium">Diagnóstico:</span> {record.diagnosis}</p>
+                <p className="text-sm text-black/60 dark:text-white/60 mt-2 line-clamp-2">{record.treatment}</p>
               </div>
 
-              <div className="mt-4 flex items-center gap-6 text-sm text-black/50">
+              <div className="mt-4 flex items-center gap-6 text-sm text-black/50 dark:text-white/50">
                 <span>Peso: {record.weight}</span>
                 <span>Temp: {record.temp}</span>
               </div>
@@ -169,13 +169,13 @@ export default function HistorialPage() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-black/5 sticky top-0 bg-white">
-              <h2 className="text-lg font-medium">
+          <div className="bg-white dark:bg-[#1a1a1a] w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5 sticky top-0 bg-white dark:bg-[#1a1a1a]">
+              <h2 className="text-lg font-medium text-black dark:text-white">
                 {selectedRecord ? `Historial - ${selectedRecord.pet}` : "Nuevo registro clínico"}
               </h2>
-              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 transition-colors">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button onClick={() => setShowModal(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <svg className="w-5 h-5 text-black dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -188,12 +188,12 @@ export default function HistorialPage() {
                       {selectedRecord.pet[0]}
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium">{selectedRecord.pet}</h3>
-                      <p className="text-black/50">{selectedRecord.owner}</p>
+                      <h3 className="text-xl font-medium text-black dark:text-white">{selectedRecord.pet}</h3>
+                      <p className="text-black/50 dark:text-white/50">{selectedRecord.owner}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">{selectedRecord.date}</p>
+                    <p className="font-medium text-black dark:text-white">{selectedRecord.date}</p>
                     <span className={`inline-block mt-1 px-3 py-1 text-xs font-medium ${typeColors[selectedRecord.type]}`}>
                       {selectedRecord.type}
                     </span>
@@ -203,8 +203,8 @@ export default function HistorialPage() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Paciente</label>
-                  <select defaultValue={selectedRecord?.pet} className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <label className="block text-sm font-medium mb-2 text-black dark:text-white">Paciente</label>
+                  <select defaultValue={selectedRecord?.pet} className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white focus:outline-none focus:border-[#f68b44]">
                     <option>Luna - María García</option>
                     <option>Max - Carlos López</option>
                     <option>Michi - Laura Fernández</option>
@@ -212,8 +212,8 @@ export default function HistorialPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Tipo de visita</label>
-                  <select defaultValue={selectedRecord?.type} className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <label className="block text-sm font-medium mb-2 text-black dark:text-white">Tipo de visita</label>
+                  <select defaultValue={selectedRecord?.type} className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white focus:outline-none focus:border-[#f68b44]">
                     <option>Consulta</option>
                     <option>Vacunación</option>
                     <option>Revisión</option>
@@ -225,26 +225,26 @@ export default function HistorialPage() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Peso (kg)</label>
+                  <label className="block text-sm font-medium mb-2 text-black dark:text-white">Peso (kg)</label>
                   <input
                     type="text"
                     defaultValue={selectedRecord?.weight.replace(" kg", "")}
-                    className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                    className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44]"
                     placeholder="0.0"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Temperatura (°C)</label>
+                  <label className="block text-sm font-medium mb-2 text-black dark:text-white">Temperatura (°C)</label>
                   <input
                     type="text"
                     defaultValue={selectedRecord?.temp.replace("°C", "")}
-                    className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                    className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44]"
                     placeholder="38.5"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Veterinario</label>
-                  <select defaultValue={selectedRecord?.vet} className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]">
+                  <label className="block text-sm font-medium mb-2 text-black dark:text-white">Veterinario</label>
+                  <select defaultValue={selectedRecord?.vet} className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white focus:outline-none focus:border-[#f68b44]">
                     <option>Dr. Rodríguez</option>
                     <option>Dra. Martínez</option>
                   </select>
@@ -252,41 +252,41 @@ export default function HistorialPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Diagnóstico</label>
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Diagnóstico</label>
                 <input
                   type="text"
                   defaultValue={selectedRecord?.diagnosis}
-                  className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44]"
+                  className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44]"
                   placeholder="Diagnóstico principal..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Tratamiento</label>
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Tratamiento</label>
                 <textarea
                   rows={4}
                   defaultValue={selectedRecord?.treatment}
-                  className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44] resize-none"
+                  className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44] resize-none"
                   placeholder="Detalla el tratamiento prescrito..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Notas adicionales</label>
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Notas adicionales</label>
                 <textarea
                   rows={3}
                   defaultValue={selectedRecord?.notes}
-                  className="w-full px-4 py-3 border border-black/10 focus:outline-none focus:border-[#f68b44] resize-none"
+                  className="w-full px-4 py-3 bg-white dark:bg-[#242424] border border-black/10 dark:border-white/10 text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:border-[#f68b44] resize-none"
                   placeholder="Observaciones, seguimiento, etc..."
                 />
               </div>
             </div>
-            <div className="flex justify-between gap-3 p-6 border-t border-black/5">
-              <button className="px-6 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors">
+            <div className="flex justify-between gap-3 p-6 border-t border-black/5 dark:border-white/5">
+              <button className="px-6 py-3 border border-black/10 dark:border-white/10 font-medium text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 Imprimir
               </button>
               <div className="flex gap-3">
-                <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 font-medium hover:bg-black/5 transition-colors">
+                <button onClick={() => setShowModal(false)} className="px-6 py-3 border border-black/10 dark:border-white/10 font-medium text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                   Cancelar
                 </button>
                 <button onClick={() => setShowModal(false)} className="px-6 py-3 bg-[#f68b44] text-white font-medium hover:bg-[#e07a35] transition-colors">

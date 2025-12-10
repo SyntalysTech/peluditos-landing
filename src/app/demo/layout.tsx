@@ -3,6 +3,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeProvider, useTheme } from "./ThemeContext";
 
 const menuItems = [
   { name: "Dashboard", href: "/demo", icon: "dashboard" },
@@ -61,13 +62,35 @@ const icons: Record<string, ReactNode> = {
   ),
 };
 
-export default function DemoLayout({ children }: { children: React.ReactNode }) {
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-lg transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+      title={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+    >
+      {theme === "dark" ? (
+        <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ) : (
+        <svg className="w-5 h-5 text-black/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function DemoContent({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const pathname = usePathname();
+  const { theme } = useTheme();
 
   useEffect(() => {
-    // Check if user has already seen the welcome screen this session
     const hasSeenWelcome = sessionStorage.getItem("demo-welcome-seen");
     if (hasSeenWelcome) {
       setShowWelcome(false);
@@ -139,12 +162,12 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
             <div className="bg-white/10 p-4 flex items-start gap-4">
               <div className="w-10 h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
                 <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
               </div>
               <div>
-                <p className="text-white font-medium">No es la versión final</p>
-                <p className="text-white/70 text-sm">Esta demo muestra las funcionalidades principales. La versión completa incluye más características.</p>
+                <p className="text-white font-medium">Modo oscuro incluido</p>
+                <p className="text-white/70 text-sm">Cambia entre modo claro y oscuro con el botón en la barra superior.</p>
               </div>
             </div>
 
@@ -188,7 +211,7 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <div className="min-h-screen bg-[#f4f2ef]">
+    <div className="min-h-screen bg-[#f4f2ef] dark:bg-[#0f0f0f] transition-colors duration-300">
       {/* Mobile sidebar backdrop */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity ${
@@ -268,11 +291,11 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-lg border-b border-black/5">
+        <header className="sticky top-0 z-30 bg-white/80 dark:bg-[#1a1a1a]/80 backdrop-blur-lg border-b border-black/5 dark:border-white/5 transition-colors duration-300">
           <div className="flex items-center justify-between px-4 lg:px-8 py-4">
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 -ml-2"
+              className="lg:hidden p-2 -ml-2 text-black dark:text-white"
               onClick={() => setSidebarOpen(true)}
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -283,25 +306,28 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
             {/* Search */}
             <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
               <div className="relative w-full">
-                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30 dark:text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
                   type="text"
                   placeholder="Buscar pacientes, clientes..."
-                  className="w-full pl-10 pr-4 py-2 bg-black/5 border-0 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f68b44]/50"
+                  className="w-full pl-10 pr-4 py-2 bg-black/5 dark:bg-white/5 border-0 rounded-lg text-sm text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#f68b44]/50"
                 />
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
               {/* Demo badge */}
               <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f68b44]/10 text-[#f68b44] text-xs font-medium">
                 <span className="w-1.5 h-1.5 bg-[#f68b44] rounded-full animate-pulse" />
                 Demo
               </span>
-              <button className="relative p-2 text-black/50 hover:text-black transition-colors">
+              <button className="relative p-2 text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
@@ -320,5 +346,13 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
         </main>
       </div>
     </div>
+  );
+}
+
+export default function DemoLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider>
+      <DemoContent>{children}</DemoContent>
+    </ThemeProvider>
   );
 }

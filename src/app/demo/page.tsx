@@ -37,8 +37,8 @@ export default function DemoDashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-light">Buenos días, <span className="font-medium">Dr. Rodríguez</span></h1>
-          <p className="text-black/50 mt-1">Miércoles, 5 de diciembre de 2025</p>
+          <h1 className="text-2xl font-light text-black dark:text-white">Buenos días, <span className="font-medium">Dr. Rodríguez</span></h1>
+          <p className="text-black/50 dark:text-white/50 mt-1">Miércoles, 5 de diciembre de 2025</p>
         </div>
         <Link
           href="/demo/agenda"
@@ -54,10 +54,10 @@ export default function DemoDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-white p-6 border border-black/5">
-            <p className="text-sm text-black/50">{stat.label}</p>
-            <p className="text-3xl font-light mt-2">{stat.value}</p>
-            <p className={`text-sm mt-2 ${stat.positive ? "text-green-600" : "text-red-500"}`}>
+          <div key={stat.label} className="bg-white dark:bg-[#1a1a1a] p-6 border border-black/5 dark:border-white/5">
+            <p className="text-sm text-black/50 dark:text-white/50">{stat.label}</p>
+            <p className="text-3xl font-light mt-2 text-black dark:text-white">{stat.value}</p>
+            <p className={`text-sm mt-2 ${stat.positive ? "text-green-600 dark:text-green-400" : "text-red-500 dark:text-red-400"}`}>
               {stat.change} vs. mes anterior
             </p>
           </div>
@@ -66,31 +66,31 @@ export default function DemoDashboard() {
 
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Today's appointments */}
-        <div className="lg:col-span-2 bg-white border border-black/5">
-          <div className="flex items-center justify-between p-6 border-b border-black/5">
-            <h2 className="font-medium">Citas de hoy</h2>
+        <div className="lg:col-span-2 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5">
+          <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5">
+            <h2 className="font-medium text-black dark:text-white">Citas de hoy</h2>
             <Link href="/demo/agenda" className="text-sm text-[#f68b44] hover:underline">
               Ver todas
             </Link>
           </div>
-          <div className="divide-y divide-black/5">
+          <div className="divide-y divide-black/5 dark:divide-white/5">
             {todayAppointments.map((apt, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 hover:bg-black/[0.02] transition-colors">
+              <div key={i} className="flex items-center gap-4 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
                 <div className="text-center min-w-[60px]">
-                  <p className="text-lg font-medium">{apt.time}</p>
+                  <p className="text-lg font-medium text-black dark:text-white">{apt.time}</p>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium truncate">{apt.pet}</p>
-                  <p className="text-sm text-black/50 truncate">{apt.owner}</p>
+                  <p className="font-medium truncate text-black dark:text-white">{apt.pet}</p>
+                  <p className="text-sm text-black/50 dark:text-white/50 truncate">{apt.owner}</p>
                 </div>
-                <div className="hidden sm:block text-sm text-black/60">
+                <div className="hidden sm:block text-sm text-black/60 dark:text-white/60">
                   {apt.type}
                 </div>
                 <div>
                   <span className={`inline-block px-3 py-1 text-xs font-medium ${
-                    apt.status === "confirmed" ? "bg-green-100 text-green-700" :
+                    apt.status === "confirmed" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" :
                     apt.status === "in_progress" ? "bg-[#f68b44]/10 text-[#f68b44]" :
-                    "bg-black/5 text-black/50"
+                    "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                   }`}>
                     {apt.status === "confirmed" ? "Confirmada" :
                      apt.status === "in_progress" ? "En curso" : "Pendiente"}
@@ -104,45 +104,45 @@ export default function DemoDashboard() {
         {/* Sidebar widgets */}
         <div className="space-y-6">
           {/* Recent patients */}
-          <div className="bg-white border border-black/5">
-            <div className="flex items-center justify-between p-6 border-b border-black/5">
-              <h2 className="font-medium">Pacientes recientes</h2>
+          <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5">
+              <h2 className="font-medium text-black dark:text-white">Pacientes recientes</h2>
               <Link href="/demo/pacientes" className="text-sm text-[#f68b44] hover:underline">
                 Ver todos
               </Link>
             </div>
-            <div className="divide-y divide-black/5">
+            <div className="divide-y divide-black/5 dark:divide-white/5">
               {recentPatients.map((patient, i) => (
-                <div key={i} className="flex items-center gap-3 p-4 hover:bg-black/[0.02] transition-colors">
+                <div key={i} className="flex items-center gap-3 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
                   <div className="w-10 h-10 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-[#f68b44]">
                     {patient.species === "Perro" ? "🐕" : "🐈"}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{patient.name}</p>
-                    <p className="text-xs text-black/50 truncate">{patient.breed}</p>
+                    <p className="font-medium text-sm truncate text-black dark:text-white">{patient.name}</p>
+                    <p className="text-xs text-black/50 dark:text-white/50 truncate">{patient.breed}</p>
                   </div>
-                  <p className="text-xs text-black/40">{patient.lastVisit}</p>
+                  <p className="text-xs text-black/40 dark:text-white/40">{patient.lastVisit}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Low stock alert */}
-          <div className="bg-white border border-black/5">
-            <div className="flex items-center justify-between p-6 border-b border-black/5">
-              <h2 className="font-medium">Stock bajo</h2>
+          <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5">
+            <div className="flex items-center justify-between p-6 border-b border-black/5 dark:border-white/5">
+              <h2 className="font-medium text-black dark:text-white">Stock bajo</h2>
               <Link href="/demo/inventario" className="text-sm text-[#f68b44] hover:underline">
                 Ver inventario
               </Link>
             </div>
-            <div className="divide-y divide-black/5">
+            <div className="divide-y divide-black/5 dark:divide-white/5">
               {lowStockItems.map((item, i) => (
                 <div key={i} className="flex items-center justify-between p-4">
                   <div>
-                    <p className="font-medium text-sm">{item.name}</p>
-                    <p className="text-xs text-black/50">Mín: {item.min} uds</p>
+                    <p className="font-medium text-sm text-black dark:text-white">{item.name}</p>
+                    <p className="text-xs text-black/50 dark:text-white/50">Mín: {item.min} uds</p>
                   </div>
-                  <span className="px-3 py-1 bg-red-100 text-red-700 text-xs font-medium">
+                  <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-medium">
                     {item.stock} uds
                   </span>
                 </div>
@@ -154,37 +154,37 @@ export default function DemoDashboard() {
 
       {/* Quick actions */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Link href="/demo/pacientes" className="flex flex-col items-center gap-3 p-6 bg-white border border-black/5 hover:border-[#f68b44]/30 transition-colors group">
+        <Link href="/demo/pacientes" className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 hover:border-[#f68b44]/30 transition-colors group">
           <div className="w-12 h-12 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-[#f68b44] group-hover:bg-[#f68b44] group-hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
             </svg>
           </div>
-          <span className="text-sm font-medium">Nuevo paciente</span>
+          <span className="text-sm font-medium text-black dark:text-white">Nuevo paciente</span>
         </Link>
-        <Link href="/demo/clientes" className="flex flex-col items-center gap-3 p-6 bg-white border border-black/5 hover:border-[#f68b44]/30 transition-colors group">
+        <Link href="/demo/clientes" className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 hover:border-[#f68b44]/30 transition-colors group">
           <div className="w-12 h-12 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-[#f68b44] group-hover:bg-[#f68b44] group-hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
           </div>
-          <span className="text-sm font-medium">Nuevo cliente</span>
+          <span className="text-sm font-medium text-black dark:text-white">Nuevo cliente</span>
         </Link>
-        <Link href="/demo/facturacion" className="flex flex-col items-center gap-3 p-6 bg-white border border-black/5 hover:border-[#f68b44]/30 transition-colors group">
+        <Link href="/demo/facturacion" className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 hover:border-[#f68b44]/30 transition-colors group">
           <div className="w-12 h-12 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-[#f68b44] group-hover:bg-[#f68b44] group-hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
             </svg>
           </div>
-          <span className="text-sm font-medium">Nueva factura</span>
+          <span className="text-sm font-medium text-black dark:text-white">Nueva factura</span>
         </Link>
-        <Link href="/demo/historial" className="flex flex-col items-center gap-3 p-6 bg-white border border-black/5 hover:border-[#f68b44]/30 transition-colors group">
+        <Link href="/demo/historial" className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 hover:border-[#f68b44]/30 transition-colors group">
           <div className="w-12 h-12 rounded-full bg-[#f68b44]/10 flex items-center justify-center text-[#f68b44] group-hover:bg-[#f68b44] group-hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <span className="text-sm font-medium">Nuevo historial</span>
+          <span className="text-sm font-medium text-black dark:text-white">Nuevo historial</span>
         </Link>
       </div>
     </div>
