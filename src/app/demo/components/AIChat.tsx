@@ -166,7 +166,13 @@ export default function AIChat() {
                     : "bg-white dark:bg-[#242424] text-black dark:text-white rounded-bl-md shadow-sm"
                 }`}
               >
-                <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                <p className="text-sm whitespace-pre-wrap leading-relaxed"
+                   dangerouslySetInnerHTML={{
+                     __html: msg.content
+                       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                       .replace(/\n/g, '<br />')
+                   }}
+                />
               </div>
             </div>
           ))}
