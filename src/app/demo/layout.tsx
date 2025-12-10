@@ -235,16 +235,16 @@ function DemoContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#f4f2ef] dark:bg-[#0f0f0f] transition-colors duration-300">
       {/* Mobile sidebar backdrop */}
-      <div
-        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity ${
-          sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setSidebarOpen(false)}
-      />
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full bg-[#f68b44] transform transition-all duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 bg-[#f68b44] transform transition-all duration-300 ease-in-out lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } ${sidebarCollapsed ? "lg:w-20" : "lg:w-64"} w-64`}
       >
