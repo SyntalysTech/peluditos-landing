@@ -266,20 +266,20 @@ export default function FacturacionPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
+      <div className="flex flex-col gap-3 sm:gap-4">
+        <div className="relative">
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/30 dark:text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             type="text"
-            placeholder="Buscar por cliente o número de factura..."
+            placeholder="Buscar factura..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-black/10 dark:border-white/10 bg-white dark:bg-[#242424] text-black dark:text-white focus:outline-none focus:border-[#f68b44]"
+            className="w-full pl-10 pr-4 py-2.5 sm:py-3 border border-black/10 dark:border-white/10 bg-white dark:bg-[#242424] text-black dark:text-white focus:outline-none focus:border-[#f68b44] text-sm sm:text-base"
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-1">
           {[
             { key: "all", label: "Todas" },
             { key: "paid", label: "Pagadas" },
@@ -289,7 +289,7 @@ export default function FacturacionPage() {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`px-4 py-3 font-medium transition-colors ${
+              className={`px-3 sm:px-4 py-2 sm:py-3 font-medium transition-colors text-xs sm:text-sm whitespace-nowrap ${
                 filter === f.key ? "bg-black dark:bg-white text-white dark:text-black" : "bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white"
               }`}
             >
@@ -299,8 +299,50 @@ export default function FacturacionPage() {
         </div>
       </div>
 
-      {/* Table */}
-      <div className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 overflow-hidden">
+      {/* Mobile Card View */}
+      <div className="sm:hidden space-y-3">
+        {filteredInvoices.map((invoice) => (
+          <div key={invoice.id} className="bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 p-4">
+            <div className="flex items-start justify-between gap-2 mb-3">
+              <div className="min-w-0">
+                <p className="font-medium text-black dark:text-white text-sm">{invoice.id}</p>
+                <p className="text-xs text-black/50 dark:text-white/50">{invoice.date}</p>
+              </div>
+              <span className={`inline-block px-2 py-0.5 text-[10px] font-medium flex-shrink-0 ${statusColors[invoice.status].bg} ${statusColors[invoice.status].text}`}>
+                {statusColors[invoice.status].label}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <div className="min-w-0">
+                <p className="text-sm text-black dark:text-white truncate">{invoice.client}</p>
+                <p className="text-xs text-black/50 dark:text-white/50">{invoice.pet}</p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="font-medium text-black dark:text-white">{(invoice.total * 1.21).toFixed(2)}€</p>
+                <p className="text-[10px] text-black/40 dark:text-white/40">IVA incl.</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between pt-2 border-t border-black/5 dark:border-white/5">
+              <p className="text-xs text-black/50 dark:text-white/50 truncate flex-1">
+                {invoice.items.map(i => i.name).join(", ")}
+              </p>
+              <button
+                onClick={() => generatePDF(invoice)}
+                className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex-shrink-0"
+                title="Ver factura"
+              >
+                <svg className="w-5 h-5 text-[#f68b44]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden sm:block bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -308,7 +350,7 @@ export default function FacturacionPage() {
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Factura</th>
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Fecha</th>
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Cliente</th>
-                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Conceptos</th>
+                <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm hidden lg:table-cell">Conceptos</th>
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Total</th>
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm">Estado</th>
                 <th className="text-left p-4 font-medium text-black/50 dark:text-white/50 text-sm"></th>
@@ -325,7 +367,7 @@ export default function FacturacionPage() {
                     <p className="text-sm text-black dark:text-white">{invoice.client}</p>
                     <p className="text-xs text-black/50 dark:text-white/50">{invoice.pet}</p>
                   </td>
-                  <td className="p-4">
+                  <td className="p-4 hidden lg:table-cell">
                     <p className="text-sm text-black/60 dark:text-white/60 truncate max-w-[200px]">
                       {invoice.items.map(i => i.name).join(", ")}
                     </p>

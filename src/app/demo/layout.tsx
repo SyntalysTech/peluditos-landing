@@ -127,81 +127,81 @@ function DemoContent({ children }: { children: React.ReactNode }) {
   // Welcome/Loader Screen
   if (showWelcome) {
     return (
-      <div className="fixed inset-0 bg-[#f68b44] z-[100] flex items-center justify-center p-6">
-        <div className="max-w-lg w-full text-center">
+      <div className="fixed inset-0 bg-[#f68b44] z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="max-w-lg w-full text-center my-auto py-6">
           {/* Logo */}
           <img
             src="/logos/logo-horizontal-white.png"
             alt="Peluditos CRM"
-            className="h-16 md:h-20 mx-auto mb-10"
+            className="h-12 sm:h-16 md:h-20 mx-auto mb-6 sm:mb-10"
           />
 
           {/* Demo badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 text-white text-sm font-medium mb-8">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 text-white text-xs sm:text-sm font-medium mb-4 sm:mb-8">
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Versión Demo
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-light text-white mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-3 sm:mb-4">
             Bienvenido a la demo
           </h1>
 
           {/* Description */}
-          <p className="text-white/90 text-lg mb-8 leading-relaxed">
-            Esta es una <strong>versión de demostración</strong> de Peluditos CRM para que puedas explorar todas las funcionalidades y ver cómo funciona el sistema.
+          <p className="text-white/90 text-base sm:text-lg mb-5 sm:mb-8 leading-relaxed px-2">
+            Esta es una <strong>versión de demostración</strong> de Peluditos CRM para que puedas explorar todas las funcionalidades.
           </p>
 
-          {/* Info cards */}
-          <div className="grid gap-4 mb-10 text-left">
-            <div className="bg-white/10 p-4 flex items-start gap-4">
-              <div className="w-10 h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          {/* Info cards - scrollable on mobile */}
+          <div className="grid gap-3 sm:gap-4 mb-6 sm:mb-10 text-left max-h-[40vh] sm:max-h-none overflow-y-auto px-1">
+            <div className="bg-white/10 p-3 sm:p-4 flex items-start gap-3 sm:gap-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-white font-medium">Explora libremente</p>
-                <p className="text-white/70 text-sm">Navega por todas las secciones: agenda, pacientes, facturación, inventario y más.</p>
+              <div className="min-w-0">
+                <p className="text-white font-medium text-sm sm:text-base">Explora libremente</p>
+                <p className="text-white/70 text-xs sm:text-sm">Navega por todas las secciones: agenda, pacientes, facturación y más.</p>
               </div>
             </div>
 
-            <div className="bg-white/10 p-4 flex items-start gap-4">
-              <div className="w-10 h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-white/10 p-3 sm:p-4 flex items-start gap-3 sm:gap-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-white font-medium">Datos de ejemplo</p>
-                <p className="text-white/70 text-sm">Los datos mostrados son ficticios. Los cambios no se guardan y se reinician al salir.</p>
+              <div className="min-w-0">
+                <p className="text-white font-medium text-sm sm:text-base">Datos de ejemplo</p>
+                <p className="text-white/70 text-xs sm:text-sm">Los datos son ficticios y no se guardan.</p>
               </div>
             </div>
 
-            <div className="bg-white/10 p-4 flex items-start gap-4">
-              <div className="w-10 h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-white/10 p-3 sm:p-4 flex items-start gap-3 sm:gap-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-white font-medium">Modo oscuro incluido</p>
-                <p className="text-white/70 text-sm">Cambia entre modo claro y oscuro con el botón en la barra superior.</p>
+              <div className="min-w-0">
+                <p className="text-white font-medium text-sm sm:text-base">Modo oscuro</p>
+                <p className="text-white/70 text-xs sm:text-sm">Cambia el tema con el botón en la barra superior.</p>
               </div>
             </div>
 
-            <div className="bg-white/10 p-4 flex items-start gap-4">
-              <div className="w-10 h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-white/10 p-3 sm:p-4 flex items-start gap-3 sm:gap-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-white font-medium">Mejor en ordenador</p>
-                <p className="text-white/70 text-sm">Esta demo está optimizada para verse en ordenador. En móvil algunas funciones pueden no visualizarse correctamente.</p>
+              <div className="min-w-0">
+                <p className="text-white font-medium text-sm sm:text-base">Mejor en ordenador</p>
+                <p className="text-white/70 text-xs sm:text-sm">Optimizada para escritorio.</p>
               </div>
             </div>
           </div>
@@ -209,10 +209,10 @@ function DemoContent({ children }: { children: React.ReactNode }) {
           {/* CTA Button */}
           <button
             onClick={handleEnterDemo}
-            className="w-full md:w-auto px-10 py-4 bg-white text-[#f68b44] text-lg font-medium hover:bg-white/95 transition-colors flex items-center justify-center gap-3 mx-auto"
+            className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#f68b44] text-base sm:text-lg font-medium hover:bg-white/95 transition-colors flex items-center justify-center gap-2 sm:gap-3 mx-auto"
           >
             Entrar a la demo
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </button>
@@ -220,9 +220,9 @@ function DemoContent({ children }: { children: React.ReactNode }) {
           {/* Back link */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 mt-6 text-white/70 hover:text-white text-sm transition-colors"
+            className="inline-flex items-center gap-2 mt-4 sm:mt-6 text-white/70 hover:text-white text-xs sm:text-sm transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Volver a la web

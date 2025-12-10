@@ -197,46 +197,47 @@ export default function AgendaPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-light text-black dark:text-white">Agenda</h1>
-          <p className="text-black/50 dark:text-white/50 mt-1">Gestiona las citas de tu clínica</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex bg-black/5 dark:bg-white/5 p-1">
-            <button
-              onClick={() => setView("week")}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "week" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
-              }`}
-            >
-              Semana
-            </button>
-            <button
-              onClick={() => setView("day")}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "day" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
-              }`}
-            >
-              Día
-            </button>
-            <button
-              onClick={() => setView("list")}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
-                view === "list" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
-              }`}
-            >
-              Lista
-            </button>
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-light text-black dark:text-white">Agenda</h1>
+            <p className="text-black/50 dark:text-white/50 mt-1 text-sm sm:text-base">Gestiona las citas de tu clínica</p>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-[#f68b44] text-white font-medium hover:bg-[#e07a35] transition-colors"
+            className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#f68b44] text-white font-medium hover:bg-[#e07a35] transition-colors text-sm sm:text-base"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
             </svg>
-            Nueva cita
+            <span className="hidden sm:inline">Nueva cita</span>
+            <span className="sm:hidden">Nueva</span>
+          </button>
+        </div>
+        <div className="flex bg-black/5 dark:bg-white/5 p-1 w-full sm:w-auto">
+          <button
+            onClick={() => setView("week")}
+            className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
+              view === "week" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
+            }`}
+          >
+            Semana
+          </button>
+          <button
+            onClick={() => setView("day")}
+            className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
+              view === "day" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
+            }`}
+          >
+            Día
+          </button>
+          <button
+            onClick={() => setView("list")}
+            className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
+              view === "list" ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white" : "text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white"
+            }`}
+          >
+            Lista
           </button>
         </div>
       </div>
@@ -270,9 +271,32 @@ export default function AgendaPage() {
       <div className="grid lg:grid-cols-4 gap-6">
         {/* Calendar grid */}
         <div className="lg:col-span-3 bg-white dark:bg-[#1a1a1a] border border-black/5 dark:border-white/5">
+          {/* Mobile: show message to use day/list view */}
           {view === "week" && (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[800px] border-collapse">
+            <div className="block sm:hidden p-6 text-center">
+              <svg className="w-12 h-12 mx-auto mb-4 text-black/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <p className="text-black/60 dark:text-white/60 mb-4">La vista semanal está optimizada para pantallas más grandes.</p>
+              <div className="flex gap-2 justify-center">
+                <button
+                  onClick={() => setView("day")}
+                  className="px-4 py-2 bg-[#f68b44] text-white text-sm font-medium hover:bg-[#e07a35] transition-colors"
+                >
+                  Ver por día
+                </button>
+                <button
+                  onClick={() => setView("list")}
+                  className="px-4 py-2 border border-black/10 dark:border-white/10 text-black dark:text-white text-sm font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                >
+                  Ver lista
+                </button>
+              </div>
+            </div>
+          )}
+          {view === "week" && (
+            <div className="hidden sm:block overflow-x-auto">
+              <table className="w-full min-w-[700px] border-collapse">
                 <thead>
                   <tr className="border-b border-black/10 dark:border-white/10">
                     <th className="w-16 p-3 text-sm text-black/50 dark:text-white/50 font-normal border-r border-black/5 dark:border-white/5"></th>
@@ -343,28 +367,28 @@ export default function AgendaPage() {
                 todayAppointments.map((apt) => (
                   <div
                     key={apt.id}
-                    className="flex items-center gap-4 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors cursor-pointer"
+                    className="flex items-center gap-2 sm:gap-4 p-3 sm:p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors cursor-pointer"
                     onClick={() => setViewingAppointment(apt)}
                   >
-                    <div className={`w-1 h-12 ${apt.color}`} />
-                    <div className="text-center min-w-[80px]">
-                      <p className="text-lg font-medium text-black dark:text-white">{apt.hour}</p>
-                      <p className="text-xs text-black/40 dark:text-white/40">{apt.duration} min</p>
+                    <div className={`w-1 h-10 sm:h-12 ${apt.color} flex-shrink-0`} />
+                    <div className="text-center min-w-[50px] sm:min-w-[80px]">
+                      <p className="text-sm sm:text-lg font-medium text-black dark:text-white">{apt.hour}</p>
+                      <p className="text-[10px] sm:text-xs text-black/40 dark:text-white/40">{apt.duration} min</p>
                     </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-black dark:text-white">{apt.pet}</p>
-                      <p className="text-sm text-black/50 dark:text-white/50">{apt.owner}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm sm:text-base text-black dark:text-white truncate">{apt.pet}</p>
+                      <p className="text-xs sm:text-sm text-black/50 dark:text-white/50 truncate">{apt.owner}</p>
                     </div>
-                    <div className="text-sm text-black/60 dark:text-white/60">{apt.type}</div>
-                    <span className={`px-3 py-1 text-xs font-medium ${
+                    <div className="hidden sm:block text-sm text-black/60 dark:text-white/60">{apt.type}</div>
+                    <span className={`hidden sm:inline-block px-3 py-1 text-xs font-medium ${
                       apt.status === "confirmed" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" :
                       apt.status === "cancelled" ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400" :
                       "bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50"
                     }`}>
                       {apt.status === "confirmed" ? "Confirmada" : apt.status === "cancelled" ? "Cancelada" : "Pendiente"}
                     </span>
-                    <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-                      <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button className="p-1.5 sm:p-2 hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex-shrink-0">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -377,31 +401,31 @@ export default function AgendaPage() {
           {view === "day" && (
             <div className="divide-y divide-black/5 dark:divide-white/5">
               {/* Day header with selector */}
-              <div className="flex items-center gap-2 p-4 bg-black/[0.02] dark:bg-white/[0.02] overflow-x-auto">
+              <div className="flex items-center gap-1 sm:gap-2 p-2 sm:p-4 bg-black/[0.02] dark:bg-white/[0.02] overflow-x-auto">
                 {weekDays.map((day, i) => (
                   <button
                     key={day}
                     onClick={() => setSelectedDay(i)}
-                    className={`flex flex-col items-center px-4 py-2 min-w-[60px] transition-colors ${
+                    className={`flex flex-col items-center px-2 sm:px-4 py-1.5 sm:py-2 min-w-[40px] sm:min-w-[60px] transition-colors ${
                       selectedDay === i
                         ? "bg-[#f68b44] text-white"
                         : "bg-white dark:bg-[#242424] hover:bg-black/5 dark:hover:bg-white/5"
                     }`}
                   >
-                    <span className={`text-xs opacity-70 ${selectedDay === i ? "" : "text-black dark:text-white"}`}>{day}</span>
-                    <span className={`text-lg font-medium ${selectedDay === i ? "" : "text-black dark:text-white"}`}>{i + 1}</span>
+                    <span className={`text-[10px] sm:text-xs opacity-70 ${selectedDay === i ? "" : "text-black dark:text-white"}`}>{day}</span>
+                    <span className={`text-sm sm:text-lg font-medium ${selectedDay === i ? "" : "text-black dark:text-white"}`}>{i + 1}</span>
                   </button>
                 ))}
               </div>
 
               {/* Day timeline */}
-              <div className="p-4">
+              <div className="p-2 sm:p-4">
                 {todayAppointments.length === 0 ? (
-                  <div className="p-8 text-center text-black/50 dark:text-white/50">
-                    <svg className="w-12 h-12 mx-auto mb-4 text-black/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="p-6 sm:p-8 text-center text-black/50 dark:text-white/50">
+                    <svg className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 text-black/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <p>No hay citas programadas</p>
+                    <p className="text-sm sm:text-base">No hay citas programadas</p>
                     <button
                       onClick={() => setShowModal(true)}
                       className="mt-4 px-4 py-2 bg-[#f68b44] text-white text-sm font-medium hover:bg-[#e07a35] transition-colors"
@@ -410,33 +434,33 @@ export default function AgendaPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {todayAppointments.map((apt) => (
                       <div
                         key={apt.id}
                         onClick={() => setViewingAppointment(apt)}
-                        className={`${apt.color} text-white p-4 cursor-pointer hover:opacity-95 transition-opacity`}
+                        className={`${apt.color} text-white p-3 sm:p-4 cursor-pointer hover:opacity-95 transition-opacity`}
                       >
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <p className="text-lg font-medium text-white">{apt.pet}</p>
-                            <p className="text-sm opacity-90 text-white">{apt.owner}</p>
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <p className="text-base sm:text-lg font-medium text-white truncate">{apt.pet}</p>
+                            <p className="text-xs sm:text-sm opacity-90 text-white truncate">{apt.owner}</p>
                           </div>
-                          <div className="text-right">
-                            <p className="font-medium text-white">{apt.hour} - {getEndTime(apt.hour, apt.duration)}</p>
-                            <p className="text-sm opacity-80 text-white">{apt.duration} min</p>
+                          <div className="text-right flex-shrink-0">
+                            <p className="font-medium text-white text-sm sm:text-base">{apt.hour} - {getEndTime(apt.hour, apt.duration)}</p>
+                            <p className="text-xs sm:text-sm opacity-80 text-white">{apt.duration} min</p>
                           </div>
                         </div>
-                        <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-between">
-                          <span className="text-sm">{apt.type}</span>
-                          <span className={`px-2 py-0.5 text-xs font-medium rounded ${
+                        <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-white/20 flex items-center justify-between gap-2">
+                          <span className="text-xs sm:text-sm truncate">{apt.type}</span>
+                          <span className={`px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded flex-shrink-0 ${
                             apt.status === "confirmed" ? "bg-white/20" : "bg-black/20"
                           }`}>
                             {apt.status === "confirmed" ? "Confirmada" : "Pendiente"}
                           </span>
                         </div>
                         {apt.notes && (
-                          <p className="mt-2 text-sm opacity-80 truncate">{apt.notes}</p>
+                          <p className="mt-2 text-xs sm:text-sm opacity-80 truncate">{apt.notes}</p>
                         )}
                       </div>
                     ))}
