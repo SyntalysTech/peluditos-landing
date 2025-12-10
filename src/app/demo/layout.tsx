@@ -86,6 +86,7 @@ function ThemeToggle() {
 
 function DemoContent({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const pathname = usePathname();
   const { theme } = useTheme();
@@ -222,74 +223,106 @@ function DemoContent({ children }: { children: React.ReactNode }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-[#f68b44] transform transition-transform lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 h-full bg-[#f68b44] transform transition-all duration-300 ease-in-out lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        } ${sidebarCollapsed ? "lg:w-20" : "lg:w-64"} w-64`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-white/20">
-            <Link href="/">
-              <img
-                src="/logos/logo-horizontal-white.png"
-                alt="Peluditos CRM"
-                className="h-10 w-auto"
-              />
+          <div className={`border-b border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-4" : "p-6"}`}>
+            <Link href="/" className="block overflow-hidden">
+              <div className={`transition-all duration-300 ease-in-out ${sidebarCollapsed ? "flex justify-center" : ""}`}>
+                <img
+                  src="/logos/logo-horizontal-white.png"
+                  alt="Peluditos CRM"
+                  className={`h-10 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "opacity-0 w-0 absolute" : "opacity-100 w-auto"}`}
+                />
+                <img
+                  src="/logos/favicon.png"
+                  alt="Peluditos CRM"
+                  className={`transition-all duration-300 ease-in-out ${sidebarCollapsed ? "opacity-100 h-10 w-10" : "opacity-0 w-0 h-0 absolute"}`}
+                />
+              </div>
             </Link>
           </div>
 
+          {/* Collapse toggle button - only visible on desktop */}
+          <button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-white rounded-full shadow-md items-center justify-center text-[#f68b44] hover:bg-gray-50 transition-colors z-10"
+          >
+            <svg
+              className={`w-4 h-4 transition-transform duration-300 ease-in-out ${sidebarCollapsed ? "rotate-180" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          <nav className={`flex-1 space-y-1 overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
             {menuItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                  className={`flex items-center gap-3 py-3 rounded-lg transition-all duration-200 ${
+                    sidebarCollapsed ? "px-0 justify-center" : "px-4"
+                  } ${
                     isActive
                       ? "bg-white text-[#f68b44]"
                       : "text-white/90 hover:bg-white/20 hover:text-white"
                   }`}
                   onClick={() => setSidebarOpen(false)}
+                  title={sidebarCollapsed ? item.name : undefined}
                 >
-                  {icons[item.icon]}
-                  <span className="font-medium">{item.name}</span>
+                  <span className="flex-shrink-0">{icons[item.icon]}</span>
+                  <span className={`font-medium whitespace-nowrap transition-all duration-300 ease-in-out ${
+                    sidebarCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
+                  }`}>
+                    {item.name}
+                  </span>
                 </Link>
               );
             })}
           </nav>
 
           {/* User profile */}
-          <div className="p-4 border-t border-white/20">
-            <div className="flex items-center gap-3 px-4 py-3">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#f68b44] font-medium">
+          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
+            <div className={`flex items-center gap-3 py-3 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-0 justify-center" : "px-4"}`}>
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#f68b44] font-medium flex-shrink-0">
                 DR
               </div>
-              <div>
-                <p className="text-white font-medium text-sm">Dr. Rodríguez</p>
-                <p className="text-white/70 text-xs">Administrador</p>
+              <div className={`transition-all duration-300 ease-in-out overflow-hidden ${sidebarCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"}`}>
+                <p className="text-white font-medium text-sm whitespace-nowrap">Dr. Rodríguez</p>
+                <p className="text-white/70 text-xs whitespace-nowrap">Administrador</p>
               </div>
             </div>
           </div>
 
           {/* Back to landing */}
-          <div className="p-4 border-t border-white/20">
+          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
             <Link
               href="/"
-              className="flex items-center gap-2 px-4 py-2 text-white/70 hover:text-white transition-colors text-sm"
+              className={`flex items-center gap-2 py-2 text-white/70 hover:text-white transition-colors text-sm ${sidebarCollapsed ? "px-0 justify-center" : "px-4"}`}
+              title={sidebarCollapsed ? "Volver a la web" : undefined}
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Volver a la web
+              <span className={`whitespace-nowrap transition-all duration-300 ease-in-out ${sidebarCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"}`}>
+                Volver a la web
+              </span>
             </Link>
           </div>
         </div>
       </aside>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className={`transition-all duration-300 ease-in-out ${sidebarCollapsed ? "lg:pl-20" : "lg:pl-64"}`}>
         {/* Top bar */}
         <header className="sticky top-0 z-30 bg-white/80 dark:bg-[#1a1a1a]/80 backdrop-blur-lg border-b border-black/5 dark:border-white/5 transition-colors duration-300">
           <div className="flex items-center justify-between px-4 lg:px-8 py-4">
