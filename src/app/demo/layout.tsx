@@ -4,16 +4,37 @@ import { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeProvider, useTheme } from "./ThemeContext";
+import AIChat from "./components/AIChat";
 
-const menuItems = [
-  { name: "Dashboard", href: "/demo", icon: "dashboard" },
-  { name: "Agenda", href: "/demo/agenda", icon: "calendar" },
-  { name: "Pacientes", href: "/demo/pacientes", icon: "pets" },
-  { name: "Clientes", href: "/demo/clientes", icon: "people" },
-  { name: "Historial", href: "/demo/historial", icon: "history" },
-  { name: "Facturación", href: "/demo/facturacion", icon: "receipt" },
-  { name: "Inventario", href: "/demo/inventario", icon: "inventory" },
-  { name: "Configuración", href: "/demo/configuracion", icon: "settings" },
+const menuSections = [
+  {
+    title: "General",
+    items: [
+      { name: "Dashboard", href: "/demo", icon: "dashboard" },
+      { name: "Agenda", href: "/demo/agenda", icon: "calendar" },
+    ],
+  },
+  {
+    title: "Clínica",
+    items: [
+      { name: "Pacientes", href: "/demo/pacientes", icon: "pets" },
+      { name: "Clientes", href: "/demo/clientes", icon: "people" },
+      { name: "Historial", href: "/demo/historial", icon: "history" },
+    ],
+  },
+  {
+    title: "Gestión",
+    items: [
+      { name: "Facturación", href: "/demo/facturacion", icon: "receipt" },
+      { name: "Inventario", href: "/demo/inventario", icon: "inventory" },
+    ],
+  },
+  {
+    title: "Sistema",
+    items: [
+      { name: "Configuración", href: "/demo/configuracion", icon: "settings" },
+    ],
+  },
 ];
 
 const icons: Record<string, ReactNode> = {
@@ -246,53 +267,83 @@ function DemoContent({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
 
-          {/* Collapse toggle button - only visible on desktop */}
-          <button
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-white rounded-full shadow-md items-center justify-center text-[#f68b44] hover:bg-gray-50 transition-colors z-10"
-          >
-            <svg
-              className={`w-4 h-4 transition-transform duration-300 ease-in-out ${sidebarCollapsed ? "rotate-180" : ""}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
           {/* Navigation */}
-          <nav className={`flex-1 space-y-1 overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
-            {menuItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-3 py-3 rounded-lg transition-all duration-200 ${
-                    sidebarCollapsed ? "px-0 justify-center" : "px-4"
-                  } ${
-                    isActive
-                      ? "bg-white text-[#f68b44]"
-                      : "text-white/90 hover:bg-white/20 hover:text-white"
-                  }`}
-                  onClick={() => setSidebarOpen(false)}
-                  title={sidebarCollapsed ? item.name : undefined}
-                >
-                  <span className="flex-shrink-0">{icons[item.icon]}</span>
-                  <span className={`font-medium whitespace-nowrap transition-all duration-300 ease-in-out ${
-                    sidebarCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
-                  }`}>
-                    {item.name}
-                  </span>
-                </Link>
-              );
-            })}
+          <nav className={`flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-3 py-4" : "p-4"}`}>
+            {menuSections.map((section, sectionIndex) => (
+              <div key={section.title} className={sectionIndex > 0 ? "mt-6" : ""}>
+                {/* Section title */}
+                <p className={`text-xs font-semibold uppercase tracking-wider text-white/40 mb-2 transition-all duration-300 ease-in-out ${
+                  sidebarCollapsed ? "hidden" : "px-4"
+                }`}>
+                  {section.title}
+                </p>
+                {/* Collapsed separator */}
+                {sidebarCollapsed && sectionIndex > 0 && (
+                  <div className="w-6 h-px bg-white/20 mx-auto mb-2" />
+                )}
+                {/* Section items */}
+                <div className={sidebarCollapsed ? "space-y-2" : "space-y-1"}>
+                  {section.items.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`flex items-center transition-all duration-200 ${
+                          sidebarCollapsed
+                            ? "w-8 h-8 justify-center mx-auto rounded-md"
+                            : "gap-3 px-4 py-2.5 rounded-lg"
+                        } ${
+                          isActive
+                            ? "bg-white text-[#f68b44]"
+                            : "text-white/90 hover:bg-white/20 hover:text-white"
+                        }`}
+                        onClick={() => setSidebarOpen(false)}
+                        title={sidebarCollapsed ? item.name : undefined}
+                      >
+                        {icons[item.icon]}
+                        <span className={`font-medium whitespace-nowrap transition-all duration-300 ease-in-out ${
+                          sidebarCollapsed ? "hidden" : "block"
+                        }`}>
+                          {item.name}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </nav>
 
+          {/* Collapse toggle button - only visible on desktop */}
+          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-3 py-3" : "px-4 py-3"}`}>
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className={`hidden lg:flex items-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 ${
+                sidebarCollapsed ? "w-8 h-8 justify-center mx-auto rounded-md" : "gap-3 w-full px-4 py-2 rounded-lg"
+              }`}
+              title={sidebarCollapsed ? "Expandir menú" : undefined}
+            >
+              <svg
+                className={`w-5 h-5 transition-transform duration-300 ease-in-out ${sidebarCollapsed ? "rotate-180" : ""}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+              <span className={`text-sm whitespace-nowrap ${sidebarCollapsed ? "hidden" : "block"}`}>
+                Colapsar menú
+              </span>
+            </button>
+          </div>
+
           {/* User profile */}
-          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
-            <div className={`flex items-center gap-3 py-3 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-0 justify-center" : "px-4"}`}>
+          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-3 py-3" : "p-4"}`}>
+            <div
+              className={`flex items-center gap-3 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "justify-center" : "px-4 py-2"}`}
+              title={sidebarCollapsed ? "Dr. Rodríguez" : undefined}
+            >
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#f68b44] font-medium flex-shrink-0">
                 DR
               </div>
@@ -304,16 +355,18 @@ function DemoContent({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Back to landing */}
-          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "p-2" : "p-4"}`}>
+          <div className={`border-t border-white/20 transition-all duration-300 ease-in-out ${sidebarCollapsed ? "px-3 py-3" : "px-4 py-3"}`}>
             <Link
               href="/"
-              className={`flex items-center gap-2 py-2 text-white/70 hover:text-white transition-colors text-sm ${sidebarCollapsed ? "px-0 justify-center" : "px-4"}`}
+              className={`flex items-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm ${
+                sidebarCollapsed ? "w-8 h-8 justify-center mx-auto rounded-md" : "gap-3 px-4 py-2 rounded-lg"
+              }`}
               title={sidebarCollapsed ? "Volver a la web" : undefined}
             >
-              <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              <span className={`whitespace-nowrap transition-all duration-300 ease-in-out ${sidebarCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"}`}>
+              <span className={`whitespace-nowrap ${sidebarCollapsed ? "hidden" : "block"}`}>
                 Volver a la web
               </span>
             </Link>
@@ -378,6 +431,9 @@ function DemoContent({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+
+      {/* AI Chat Assistant */}
+      <AIChat />
     </div>
   );
 }
